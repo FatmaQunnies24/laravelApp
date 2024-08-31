@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CharifitController;
 use App\Http\Controllers\ActivitiesController;
 use App\Http\Controllers\CausesController;
-
+use App\Http\Controllers\VolunteerController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -25,4 +25,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::apiResource('posts', CharifitController::class);
 Route::apiResource('activities', ActivitiesController::class);
 Route::apiResource('causes', CausesController::class);
+Route::apiResource('volunteer', VolunteerController::class);
 
