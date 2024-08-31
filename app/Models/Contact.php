@@ -4,14 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Carbon\Carbon;
-class Comment extends Model
+
+class Contact extends Model
 {
     use HasFactory;
-    protected $table = '_comment';
+    protected $table = '_contact';
     protected $primaryKey = 'id';
-    protected $fillable = ['name', 'username',	'blog_id',		'disc','email','website','imgUrl'];
-
-
+    protected $fillable = ['message', 'name',	'email',		'subject'];
 
 }

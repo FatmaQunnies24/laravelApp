@@ -1,20 +1,21 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\News;
 use Illuminate\Http\Request;
-use App\Models\Causes;
 use Illuminate\Support\Facades\Storage; 
+use Carbon\Carbon;
 
-class CausesController extends Controller
+
+class NewsController extends Controller
 {
     public function index()
     {
-        $_Causes = Causes::take(6)->get();
+        $_News = News::take(3)->get();
     
         return response()->json([
             'status' => true,
-            'Causes' => $_Causes
+            'News' => $_News
         ], 200);
     }
 
@@ -24,21 +25,20 @@ class CausesController extends Controller
             $image = $request->file('imgUrl');
             $imageName = time().'.'.$image->extension();
             Storage::disk('public')->put($imageName, file_get_contents($image));
-        
-            $_Causes =  Causes::create([
+            $formattedDate = Carbon::parse($request->date)->format('Y-m-d');
+
+            $_News =  News::create([
                 'name' => $request->name,
-                'raised' => $request->raised,
-                'goal' => $request->goal,
-                'pre' => $request->pre,
+                'date' => $formattedDate,
                 'imgUrl' => $imageName,
-                'smallDisc' => $request->smallDisc,
                 'desc' => $request->desc,
+                
             ]);
         
             return response()->json([
                 'status' => true,
-                'message' => 'Causes Created successfully',
-                'Causes' => $_Causes
+                'message' => 'News Created successfully',
+                'News' => $_News
             ], 201);
         } else {
             return response()->json([
