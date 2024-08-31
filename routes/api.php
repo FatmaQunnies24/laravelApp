@@ -10,6 +10,7 @@ use App\Http\Controllers\NewsController;
 use App\Http\Controllers\DonationController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\LoginController;
 
 use App\Http\Controllers\BlogController;
 
@@ -39,6 +40,10 @@ Route::apiResource('donation', DonationController::class);
 Route::apiResource('contact', ContactController::class);
 
 Route::apiResource('blog', BlogController::class);
+// Route::apiResource('login', LoginController::class);
+Route::post('/login', [LoginController::class, 'loginUser']);
+Route::post('/register', [LoginController::class, 'createUser']);
+
 Route::get('/blog/{id}', [BlogController::class, 'show']);
 
 Route::apiResource('comment', CommentController::class);
