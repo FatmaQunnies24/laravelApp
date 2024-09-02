@@ -12,6 +12,8 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\LoginController;
 
+use App\Http\Controllers\DashboartController;
+
 use App\Http\Controllers\BlogController;
 
 /*
@@ -43,6 +45,7 @@ Route::apiResource('blog', BlogController::class);
 // Route::apiResource('login', LoginController::class);
 Route::post('/login', [LoginController::class, 'loginUser']);
 Route::post('/register', [LoginController::class, 'createUser']);
+Route::post('/register', [LoginController::class, 'createUser'])->name('register');
 
 Route::get('/blog/{id}', [BlogController::class, 'show']);
 
@@ -51,3 +54,6 @@ Route::get('/comments/{blogId}', [CommentController::class, 'commentBlogId']);
 
 
 Route::get('/commentcount/{blogId}', [CommentController::class, 'numComment']);
+Route::post('/logout', [LoginController::class, 'logoutUser'])->name('logoutUser');
+Route::post('/signIn', [LoginController::class, 'loginUser'])->name('loginUser');
+Route::get('/home', [DashboartController::class, 'index'])->name('home');

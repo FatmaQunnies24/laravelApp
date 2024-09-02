@@ -36,11 +36,13 @@ class LoginController extends Controller
             ]);
 
             // Return a success response with an API token
-            return response()->json([
+             response()->json([
                 'status' => true,
                 'message' => 'User created successfully',
-                'token' => $user->createToken("API TOKEN")->plainTextToken
+                'token' => $user->createToken("API TOKEN")->plainTextToken,
+                'redirect' => route('home')
             ], 200);
+            return redirect()->route('home');
 
         } catch (\Throwable $th) {
             return response()->json([
@@ -53,7 +55,6 @@ class LoginController extends Controller
     public function loginUser(Request $request)
     {
         try {
-            // Validate the login input
             $validateUser = Validator::make($request->all(), [
                 'email' => 'required|email',
                 'password' => 'required'
@@ -67,21 +68,37 @@ class LoginController extends Controller
                 ], 401);
             }
 
-            // Attempt to log the user in
             if (!Auth::attempt($request->only(['email', 'password']))) {
                 return response()->json([
                     'status' => false,
-                    'message' => 'Email & Password do not match our records.',
+                    'message' => 'Email & Password do not match our records.'
                 ], 401);
             }
 
-            // Retrieve the user and return a success response with an API token
             $user = User::where('email', $request->email)->first();
 
             return response()->json([
                 'status' => true,
                 'message' => 'User Logged In Successfully',
                 'token' => $user->createToken("API TOKEN")->plainTextToken
+            ], 200);
+
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => false,
+                'message' => $th->getMessage()
+            ], 500);
+        }
+    }
+
+    public function logoutUser(Request $request)
+    {
+        try {
+            $request->user()->currentAccessToken()->delete();
+
+            return response()->json([
+                'status' => true,
+                'message' => 'User Logged Out Successfully'
             ], 200);
 
         } catch (\Throwable $th) {
