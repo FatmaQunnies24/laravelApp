@@ -37,6 +37,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::apiResource('posts', CharifitController::class);
 Route::apiResource('activities', ActivitiesController::class);
 Route::apiResource('causes', CausesController::class);
+Route::post('/causes/{id}', [CausesController::class, 'update']);
+Route::delete('causes/{id}', [CausesController::class, 'destroy']);
 
 
 // Route::get('/causes', [CauseController::class, 'index']);

@@ -47,4 +47,66 @@ class CausesController extends Controller
             ], 400);
         }
     }
+
+    public function update(Request $request, $id)
+{
+    $cause = Causes::find($id);
+    
+    if (!$cause) {
+        return response()->json([
+            'status' => false,
+            'message' => 'Cause not found'
+        ], 404);
+    }
+
+    $cause->name = $request->name ?? $cause->name;
+    $cause->raised = $request->raised ?? $cause->raised;
+    $cause->goal = $request->goal ?? $cause->goal;
+    $cause->pre = $request->pre ?? $cause->pre;
+    $cause->smallDisc = $request->smallDisc ?? $cause->smallDisc;
+    $cause->desc = $request->desc ?? $cause->desc;
+
+    if ($request->hasFile('imgUrl')) {
+        if ($cause->imgUrl) {
+            Storage::disk('public')->delete($cause->imgUrl);
+        }
+
+        $image = $request->file('imgUrl');
+        $imageName = time().'.'.$image->extension();
+        Storage::disk('public')->put($imageName, file_get_contents($image));
+
+        $cause->imgUrl = $imageName;
+    }
+
+    $cause->save();
+
+    return response()->json([
+        'status' => true,
+        'message' => 'Cause updated successfully',
+        'Cause' => $cause
+    ], 200);
+}
+public function destroy($id)
+{
+    $cause = Causes::find($id);
+
+    if (!$cause) {
+        return response()->json([
+            'status' => false,
+            'message' => 'Cause not found'
+        ], 404);
+    }
+
+    // if ($cause->imgUrl) {
+    //     Storage::disk('public')->delete($cause->imgUrl);
+    // }
+
+    $cause->delete();
+
+    return response()->json([
+        'status' => true,
+        'message' => 'Cause deleted successfully'
+    ], 200);
+}
+
 }
