@@ -13,6 +13,8 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\LoginController;
 
 use App\Http\Controllers\DashboartController;
+use App\Http\Controllers\BeginningController;
+
 
 use App\Http\Controllers\BlogController;
 
@@ -36,6 +38,9 @@ Route::apiResource('posts', CharifitController::class);
 Route::apiResource('activities', ActivitiesController::class);
 Route::apiResource('causes', CausesController::class);
 Route::apiResource('volunteer', VolunteerController::class);
+Route::apiResource('beginning', BeginningController::class);
+Route::put('/beginning/{id}', [BeginningController::class, 'update'])->name('update');
+Route::post('/posts/{id}', [CharifitController::class, 'update']);
 
 Route::apiResource('news', NewsController::class);
 Route::apiResource('donation', DonationController::class);

@@ -54,44 +54,27 @@ class CharifitController extends Controller
         
     }
 
+    public function update(Request $request, $id)
+    {
+       
+        $reason_of_helping = Reason_of_helping::findOrFail($id);
+            $imageName = $reason_of_helping->imgUrl; // الحفاظ على الاسم الأصلي للصورة القديمة
+   if ($request->hasFile('imgUrl')) {
+            $imageName = time() . '.' . $request->imgUrl->extension();
+            $destinationPath = public_path('assets/auth/images');
+            $request->imgUrl->move($destinationPath, $imageName);
+        }
+        $reason_of_helping->update([
+            'name' =>  $request->input('name'),
+            'desc' =>  $request->input('desc'),
+            'imgUrl' => $imageName,
+        ]);
 
-   
-//     public function update(Request $request, Reason_of_helping $reason_of_helping)
-//     {
-//         $reason_of_helping = Reason_of_helping::findOrFail($reason_of_helping->id);
-
-//         if($request->has('image')){
-//             $imageName = time().'.'.$request->image->extension();
-//             Storage::disk('public')->put($imageName, file_get_contents($request->image));
-
-//             $reason_of_helping->update([
-//                 'name' => $request->name,
-//                 'desc' => $request->desc,
-//                 'imgUrl' => $imageName,
-//             ]);
-
-//             return response()->json([
-//                 'status' => true,
-//                 'message' => 'reason_of_helping Updated successfully',
-//                 'reason_of_helping' => $_reason_of_helping
-
-//             ], 201);
-//         }else{
-//             $reason_of_helping->update([
-//                 'name' => $request->name,
-//                 'desc' => $request->desc,
-//                 'imgUrl' => $imageName,
-//             ]);
-
-//             return response()->json([
-//                 'status' => true,
-//                 'message' => 'Reason_of_helping Updated successfully',
-//                 'reason_of_helping' => $_reason_of_helping
-//             ], 201);
-//         }
-//     }
-//     public function destroy($id)
-//     {
-//         //
-//     }
-}
+        return response()->json([
+            'status' => true,
+            'message' => 'تم تحديث سبب المساعدة بنجاح',
+            'reason_of_helping' => $reason_of_helping
+        ], 200);
+    }
+    
+}    
