@@ -1,0 +1,99 @@
+.causes-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+    width:80% ;
+    margin-left: 10%;
+  }
+  
+  .single_cause {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+    width: calc(33.333% - 20px);
+    transition: transform 0.3s;
+  }
+  
+  .single_cause:hover {
+    transform: translateY(-10px);
+  }
+  
+  .single_cause .thumb {
+    border-radius: 10px 10px 0 0;
+    overflow: hidden;
+  }
+  
+  .single_cause .thumb img {
+    width: 100%;
+    transition: transform 0.3s;
+  }
+  
+  .single_cause:hover .thumb img {
+    transform: scale(1.05);
+  }
+  
+  .single_cause .causes_content {
+    padding: 20px;
+    text-align: left;
+  }
+  
+  .single_cause .causes_content h4 {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 15px;
+  }
+  
+  .single_cause .causes_content p {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 10px;
+  }
+  
+  .single_cause .causes_content .custom_progress_bar {
+    margin-bottom: 15px;
+  }
+  
+  .single_cause .causes_content .custom_progress_bar .progress {
+    background-color: #f2f2f2;
+    border-radius: 30px;
+    overflow: hidden;
+  }
+  
+  .single_cause .causes_content .custom_progress_bar .progress .progress-bar {
+    background-color: #3CC78F;
+  }
+  
+  .single_cause .causes_content .balance {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    color: #333;
+    font-weight: 600;
+  }
+  
+  .single_cause .read_more {
+    display: inline-block;
+    margin-top: 15px;
+    font-size: 14px;
+    color: #3CC78F;
+    text-decoration: none;
+  }
+  
+  .single_cause .read_more:hover {
+    text-decoration: underline;
+  }
+  
+  @media (max-width: 767px) {
+    .single_cause {
+      width: 100%;
+    }
+  
+    .causes-container {
+      flex-direction: column;
+      gap: 15px;
+    }
+  }
+  

@@ -1,0 +1,133 @@
+/* Latest Activities Area */
+.latest_activites_area {
+    background: none; /* إزالة الخلفية */
+    display: flex; /* استخدام flexbox لضبط العرض بدون مسافات */
+    height: 100vh; /* ضمان ارتفاع كامل للعرض */
+    padding: 0; /* إزالة التباعد الداخلي */
+    margin: 0; /* إزالة التباعد الخارجي */
+}
+
+.latest_activites_area .video_bg_1 {
+    flex: 1; /* السماح للفيديو بأخذ المساحة المتاحة */
+    position: relative;
+    width: 100%; 
+    height: 100%;
+    overflow: hidden; /* ضمان عدم تجاوز الفيديو للعنصر */
+}
+
+.latest_activites_area .video_bg_1 iframe {
+    width: 100%;
+    height: 100%;
+    border: none; /* إزالة حدود الـ iframe */
+}
+
+.latest_activites_area .activites_info {
+    flex: 1; /* السماح للمحتوى بأخذ المساحة المتاحة */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px; /* تقليل المسافة الداخلية */
+    box-shadow: none; /* إزالة الظل */
+    background: none; /* إزالة الخلفية */
+    height: 100%;
+}
+
+.latest_activites_area .activites_info p.para_1 {
+    margin-bottom: 22px;
+    margin-top: 20px;
+}
+
+.latest_activites_area .activites_info button.but {
+    color: #fff;
+    display: inline-block;
+    padding: 13px 44px;
+    font-size: 16px;
+    font-weight: 600;
+    border: 0;
+    border-radius: 5px;
+    text-align: center;
+    text-transform: capitalize;
+    transition: 0.5s;
+    background: #3CC78F;
+    font-family: "Open Sans", sans-serif;
+    cursor: pointer;
+    border: 1px solid transparent;
+}
+
+/* Modal Styles */
+#editModal {
+    display: none; /* مخفي بشكل افتراضي */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    /* box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3); */
+    z-index: 1000;
+    width: 50%;
+    border: none;
+}
+
+.modal-content {
+    display: flex;
+    flex-direction: column;
+    border-radius: 0px; 
+}
+
+.modal-content h4 {
+    margin: 0 0 20px;
+    font-size: 24px;
+    font-weight: 700;
+    color: #333;
+}
+
+.modal-content label {
+    margin-top: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #555;
+}
+
+.modal-content input, .modal-content textarea {
+    margin-bottom: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    width: 100%;
+    font-size: 14px;
+    background: #f9f9f9; /* خلفية خفيفة للحقول */
+}
+
+.modal-content textarea {
+    height: 150px;
+    resize: none;
+}
+
+.modal-content button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+    margin: 5px; /* تباعد بين الأزرار */
+    transition: background-color 0.3s;
+}
+
+.modal-content button:hover {
+    background-color: #45a049;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: space-between; /* توزيع الأزرار على الأطراف */
+}
+
+
+
+.container {
+    width: 50%;
+    margin-right: 0%;
+}

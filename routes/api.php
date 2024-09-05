@@ -37,11 +37,16 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::apiResource('posts', CharifitController::class);
 Route::apiResource('activities', ActivitiesController::class);
 Route::apiResource('causes', CausesController::class);
+
+
+// Route::get('/causes', [CauseController::class, 'index']);
+
 Route::apiResource('volunteer', VolunteerController::class);
 Route::apiResource('beginning', BeginningController::class);
 Route::put('/beginning/{id}', [BeginningController::class, 'update'])->name('update');
 Route::post('/posts/{id}', [CharifitController::class, 'update']);
 Route::delete('/posts/{id}', [ReasonOfHelpingController::class, 'destroy']);
+Route::post('/activities/{id}', [ActivitiesController::class, 'update'])->name('activities.update');
 
 Route::apiResource('news', NewsController::class);
 Route::apiResource('donation', DonationController::class);

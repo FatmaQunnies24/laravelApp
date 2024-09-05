@@ -50,4 +50,25 @@ class ActivitiesController extends Controller
          
  
          
-     }}
+     }
+     public function update(Request $request, $id)
+     {
+     
+ 
+         $activity = Activities::findOrFail($id);
+ 
+         $activity->name = $request->input('name');
+         $activity->videoUrl = $request->input('videoUrl');
+         $activity->desc = $request->input('desc');
+         $activity->save();
+//  return    $request->all();
+         return response()->json([
+             'status' => true,
+             'message' => 'Activity updated successfully!',
+             'activity' => $activity
+         ], 200);
+     }
+ 
+    
+    
+    }
