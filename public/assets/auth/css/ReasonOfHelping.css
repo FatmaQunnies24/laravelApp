@@ -184,3 +184,22 @@
 .editBtn.visible {
     display: block;
 }
+.deleteBtn {
+    position: absolute; /* يسمح بالموضعية بالنسبة للحاوية */
+    top: 10px; /* تعديل المسافة من الأعلى */
+    right: 60px; /* تعديل المسافة من اليمين */
+    background-color: #dc3545; /* لون الزر الأحمر */
+    color: #fff; /* لون النص */
+    border: none; /* إزالة الحدود */
+    border-radius: 5px; /* زوايا مدورة */
+    padding: 5px 10px; /* التبطين داخل الزر */
+    cursor: pointer; /* تغيير المؤشر عند التمرير */
+    z-index: 1000; /* التأكد من ظهوره فوق العناصر الأخرى */
+    font-size: 14px; /* حجم الخط */
+    transition: opacity 0.3s, visibility 0.3s; /* انتقال سلس لتغير الرؤية */
+}
+
+/* حالة التمرير للزر */
+.deleteBtn:hover {
+    background-color: #c82333; /* لون الخلفية الداكن عند التمرير */
+}

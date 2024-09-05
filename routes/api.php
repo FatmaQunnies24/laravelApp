@@ -41,6 +41,7 @@ Route::apiResource('volunteer', VolunteerController::class);
 Route::apiResource('beginning', BeginningController::class);
 Route::put('/beginning/{id}', [BeginningController::class, 'update'])->name('update');
 Route::post('/posts/{id}', [CharifitController::class, 'update']);
+Route::delete('/posts/{id}', [ReasonOfHelpingController::class, 'destroy']);
 
 Route::apiResource('news', NewsController::class);
 Route::apiResource('donation', DonationController::class);

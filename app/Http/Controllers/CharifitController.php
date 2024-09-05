@@ -72,9 +72,31 @@ class CharifitController extends Controller
 
         return response()->json([
             'status' => true,
-            'message' => 'تم تحديث سبب المساعدة بنجاح',
+            'message' => 'update successfully',
             'reason_of_helping' => $reason_of_helping
         ], 200);
     }
     
+
+    public function destroy($id)
+{
+    $reason_of_helping = Reason_of_helping::findOrFail($id);
+
+    $imagePath = public_path('assets/auth/images/' . $reason_of_helping->imgUrl);
+
+    if (file_exists($imagePath)) {
+        unlink($imagePath);
+    }
+
+    $reason_of_helping->delete();
+
+    return response()->json([
+        'status' => true,
+        'message' => 'deleted successfully'
+    ], 200);
+}
+
+
+
+
 }    

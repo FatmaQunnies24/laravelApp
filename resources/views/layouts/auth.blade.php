@@ -821,8 +821,25 @@
         });
     });
 </script> -->
-<div class="reson_area" style="width: 100%; margin-left: 15%; display: flex; gap: 10px; flex-wrap: wrap;">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- reasone page -->
+
+<!-- <div class="reson_area" style="width: 100%; margin-left: 15%; display: flex; gap: 10px; flex-wrap: wrap;">
 </div>
+
 <div id="editPopup" class="popup">
     <div class="popup-content">
         <span class="close">&times;</span>
@@ -867,6 +884,7 @@
                         </div>
                         <div class="help_contente">
                             <button class="editBtn" data-id="${item.id}" data-name="${item.name}" data-desc="${item.desc}" data-imgUrl="${item.imgUrl}" onclick="openEditPopup(this)">Edit</button>
+                            <button class="deleteBtn" data-id="${item.id}" onclick="deletePost(this)">Delete</button>
                             <h4>${item.name}</h4>
                             <p>
                                 ${item.desc.length > 100 ? 
@@ -890,12 +908,14 @@
         closeBtn.onclick = function() {
             popup.style.display = "none";
             document.querySelectorAll('.editBtn.hidden').forEach(btn => btn.classList.remove('hidden'));
+            document.querySelectorAll('.deleteBtn.hidden').forEach(btn => btn.classList.remove('hidden'));
         }
 
         window.onclick = function(event) {
             if (event.target == popup) {
                 popup.style.display = "none";
                 document.querySelectorAll('.editBtn.hidden').forEach(btn => btn.classList.remove('hidden'));
+                document.querySelectorAll('.deleteBtn.hidden').forEach(btn => btn.classList.remove('hidden'));
             }
         }
 
@@ -907,7 +927,7 @@
             if (postId) {
                 formData.append("id", postId);
                 
-                console.log('FormData entries:', Array.from(formData.entries()));
+                console.log('FormData entries:', Array.from(formData.entries())); // تحقق من البيانات المرسلة
 
                 fetch(`http://127.0.0.1:8000/api/posts/${postId}`, {
                     method: 'POST',
@@ -932,6 +952,7 @@
 
             popup.style.display = "none";
             document.querySelectorAll('.editBtn.hidden').forEach(btn => btn.classList.remove('hidden'));
+            document.querySelectorAll('.deleteBtn.hidden').forEach(btn => btn.classList.remove('hidden'));
         });
     });
 
@@ -948,15 +969,46 @@
 
     function openEditPopup(button) {
         const postId = button.getAttribute('data-id');
-        console.log('ID passed to function:', postId);
+        console.log('ID passed to function:', postId); 
         document.getElementById("editName").value = button.getAttribute('data-name');
         document.getElementById("editDesc").value = button.getAttribute('data-desc');
         document.getElementById("editImg").value = ''; 
         document.getElementById("editPopup").style.display = "block";
 
         document.querySelectorAll('.editBtn').forEach(btn => btn.classList.add('hidden'));
+        document.querySelectorAll('.deleteBtn').forEach(btn => btn.classList.add('hidden'));
     }
-</script>
+
+    function deletePost(button) {
+        const postId = button.getAttribute('data-id');
+        if (confirm('Are you sure you want to delete this post?')) {
+            fetch(`http://127.0.0.1:8000/api/posts/${postId}`, {
+                method: 'DELETE',
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Post deleted:', data);
+                location.reload();
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+    }
+</script> -->
+
+
+
+
+
+
+
+
 
 
 
