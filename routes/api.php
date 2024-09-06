@@ -39,7 +39,8 @@ Route::apiResource('activities', ActivitiesController::class);
 Route::apiResource('causes', CausesController::class);
 Route::post('/causes/{id}', [CausesController::class, 'update']);
 Route::delete('causes/{id}', [CausesController::class, 'destroy']);
-
+Route::post('/volunteer/{id}', [VolunteerController::class, 'update']); 
+Route::delete('/volunteer/{id}', [VolunteerController::class, 'destroy']); 
 
 // Route::get('/causes', [CauseController::class, 'index']);
 
