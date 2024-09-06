@@ -69,6 +69,8 @@ Route::post('/register', [LoginController::class, 'createUser']);
 Route::post('/register', [LoginController::class, 'createUser'])->name('register');
 
 Route::get('/blog/{id}', [BlogController::class, 'show']);
+Route::post('/blog/{id}', [BlogController::class, 'update']);
+Route::delete('/blog/{id}', [BlogController::class, 'destroy']);
 
 Route::apiResource('comment', CommentController::class);
 Route::get('/comments/{blogId}', [CommentController::class, 'commentBlogId']);

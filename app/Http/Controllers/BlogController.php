@@ -12,7 +12,7 @@ class BlogController extends Controller
     public function index()
     {
       
-            $_Blog = Blog::take(3)->get();
+            $_Blog = Blog::take(4)->get();
         
             return response()->json([
                 'status' => true,
@@ -69,6 +69,63 @@ class BlogController extends Controller
             }
                 
 }
+public function update(Request $request, $id)
+{
+    $_Blog = Blog::find($id);
 
+    if (!$_Blog) {
+        return response()->json([
+            'status' => false,
+            'message' => 'Blog not found'
+        ], 404);
     }
-    
+
+    if ($request->hasFile('imgUrl')) {
+        if (Storage::disk('public')->exists($_Blog->imgUrl)) {
+            Storage::disk('public')->delete($_Blog->imgUrl);
+        }
+
+        $image = $request->file('imgUrl');
+        $imageName = time() . '.' . $image->extension();
+        Storage::disk('public')->put($imageName, file_get_contents($image));
+        $_Blog->imgUrl = $imageName;
+    }
+
+    $formattedDate = Carbon::parse($request->date)->format('Y-m-d');
+    $_Blog->name = $request->name;
+    $_Blog->date = $formattedDate;
+    $_Blog->style = $request->style;
+    $_Blog->disc = $request->disc;
+
+    $_Blog->save();
+
+    return response()->json([
+        'status' => true,
+        'message' => 'Blog updated successfully',
+        'Blog' => $_Blog
+    ], 200);
+}
+
+public function destroy($id)
+{
+    $_Blog = Blog::find($id);
+
+    if (!$_Blog) {
+        return response()->json([
+            'status' => false,
+            'message' => 'Blog not found'
+        ], 404);
+    }
+
+    if (Storage::disk('public')->exists($_Blog->imgUrl)) {
+        Storage::disk('public')->delete($_Blog->imgUrl);
+    }
+
+    $_Blog->delete();
+
+    return response()->json([
+        'status' => true,
+        'message' => 'Blog deleted successfully'
+    ], 200);
+}
+}
