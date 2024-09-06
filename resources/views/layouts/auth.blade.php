@@ -38,6 +38,7 @@
       <link rel="stylesheet" href= "{{ asset('assets/auth/css/Activities.css')}}">
       <link rel="stylesheet" href= "{{ asset('assets/auth/css/cases.css')}}">
       <link rel="stylesheet" href= "{{ asset('assets/auth/css/volunteer.css')}}">
+      <link rel="stylesheet" href= "{{ asset('assets/auth/css/news.css')}}">
 
   </head>
   <body class="  ">
@@ -1599,36 +1600,22 @@ document.getElementById('editForm').addEventListener('submit', function(e) {
 
 
 
-
-
 <!-- volunteer-->
-<div class="news__areaa" style="width: 100%; margin-left: 15%; display: flex; gap: 10px; flex-wrap: wrap;"></div>
+<!-- <div class="news__areaa" style="width: 100%; margin-left: 15%; display: flex; gap: 10px; flex-wrap: wrap;"></div>
 
 <div id="editPopup" class="popup" style="display: none;">
     <div class="popup-content">
         <span class="close">&times;</span>
-        <h3>Edit</h3>
+        <h3>Edit News</h3>
         <form id="editForm" enctype="multipart/form-data">
-            <label for="editName">Name</label>
+            <label for="editName">Name:</label>
             <input type="text" id="editName" name="name" required><br><br>
 
             <label for="editDesc">Description:</label>
-            <textarea id="editDesc" name="info" required></textarea><br><br>
+            <textarea id="editDesc" name="desc" required></textarea><br><br>
 
             <label for="editImg">Image:</label>
             <input type="file" id="editImg" name="imgUrl"><br><br>
-
-            <label for="editFacebook">Facebook:</label>
-            <input type="url" id="editFacebook" name="facebook"><br><br>
-
-            <label for="editPinterest">Pinterest:</label>
-            <input type="url" id="editPinterest" name="pinterest"><br><br>
-
-            <label for="editLinkedin">LinkedIn:</label>
-            <input type="url" id="editLinkedin" name="linkedin"><br><br>
-
-            <label for="editTwitter">Twitter:</label>
-            <input type="url" id="editTwitter" name="twitter"><br><br>
 
             <button type="submit">Submit</button>
         </form>
@@ -1636,150 +1623,160 @@ document.getElementById('editForm').addEventListener('submit', function(e) {
 </div>
 
 <script>
-    // On page load
     document.addEventListener('DOMContentLoaded', () => {
-        // Fetch volunteer data from the API
-        fetch('http://127.0.0.1:8000/api/news')
-            .then(response => response.json())
-            .then(data => {
-                console.log('Data fetched:', data);
-                const container = document.querySelector('.reson_area');
+    fetch('http://127.0.0.1:8000/api/news')
+        .then(response => response.json())
+        .then(data => {
+            const container = document.querySelector('.news__areaa'); 
 
-                if (!container) {
-                    console.error('Element with class "reson_area" not found.');
-                    return;
-                }
+            if (!container) {
+                console.error('Element with class "news__areaa" not found.');
+                return;
+            }
 
-                const items = data.Volunteer; // Get volunteer data
-                items.forEach(item => {
-                    const div = document.createElement('div');
-                    div.className = 'single_volunteer';
-                    div.innerHTML = `
-                      <div key={index} className="single__bloga">
-                <div className="thuma">
-                    <img src={item.imgUrl} alt={item.name} />
-                </div>
-                <div className="newsinfoa">
-                    <span>{item.date}</span>
-                    <h3>{item.name}</h3>
-                    <p>{item.desc}</p>
-                   
-                    <Link to="/SingleBlog" className="read_morea" style={{ marginLeft: 0 }}>   Read More
-                    </Link>
-
-                </div>
-                    `;
-                    container.appendChild(div);
-                });
-            })
-            .catch(error => {
-                console.error('There was a problem with the fetch operation:', error);
+            const items = data.News;
+            items.forEach((item, index) => {
+                const div = document.createElement('div');
+                div.className = 'single__bloga';
+                div.innerHTML = `
+                    <div class="thuma">
+                        <img src="{{ asset('assets/auth') }}${item.imgUrl}" alt="${item.name}"/>
+                    </div>
+                    <div class="newsinfoa">
+                        <span>${item.date}</span>
+                        <h3>${item.name}</h3>
+                        <p>${item.desc}</p>
+                       
+                            <button class="editBtn" data-id="${item.id}" data-name="${item.name}" data-info="${item.desc}" onclick="openEditPopup(this)">Edit</button>
+                            <button class="deleteBtn" data-id="${item.id}" onclick="deletePost(this)">Delete</button>
+                       
+                    </div>
+                `;
+                container.appendChild(div);
             });
-    });
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+        });
+});
+function openEditPopup(button) {
+    const postId = button.getAttribute('data-id');
+    document.getElementById("editName").value = button.getAttribute('data-name');
+    document.getElementById("editDesc").value = button.getAttribute('data-info');
+    document.getElementById("editImg").value = '';
 
-    // Open edit popup
-    function openEditPopup(button) {
-        const postId = button.getAttribute('data-id');
-        document.getElementById("editName").value = button.getAttribute('data-name');
-        document.getElementById("editDesc").value = button.getAttribute('data-info');
-        document.getElementById("editFacebook").value = button.getAttribute('data-facebook');
-        document.getElementById("editPinterest").value = button.getAttribute('data-pinterest');
-        document.getElementById("editLinkedin").value = button.getAttribute('data-linkedin');
-        document.getElementById("editTwitter").value = button.getAttribute('data-twitter');
-        document.getElementById("editImg").value = '';
-
-        popup.style.display = "block";
-
-        document.querySelectorAll('.editBtn').forEach(btn => btn.classList.add('hidden'));
-        document.querySelectorAll('.deleteBtn').forEach(btn => btn.classList.add('hidden'));
-
-        // Set the id in a hidden property
-        document.getElementById("editForm").dataset.id = postId;
-    }
-
-    // Close popup
     const popup = document.getElementById("editPopup");
-    const closeBtn = document.getElementsByClassName("close")[0];
+    popup.style.display = "block";
 
-    closeBtn.onclick = function() {
+    document.querySelectorAll('.editBtn').forEach(btn => btn.classList.add('hidden'));
+    document.querySelectorAll('.deleteBtn').forEach(btn => btn.classList.add('hidden'));
+
+    document.getElementById("editForm").dataset.id = postId;
+}
+
+const closeBtn = document.getElementsByClassName("close")[0];
+closeBtn.onclick = function() {
+    const popup = document.getElementById("editPopup");
+    popup.style.display = "none";
+    resetButtonsAndForm();
+};
+
+window.onclick = function(event) {
+    const popup = document.getElementById("editPopup");
+    if (event.target == popup) {
         popup.style.display = "none";
-        document.querySelectorAll('.editBtn.hidden').forEach(btn => btn.classList.remove('hidden'));
-        document.querySelectorAll('.deleteBtn.hidden').forEach(btn => btn.classList.remove('hidden'));
-        document.getElementById("editForm").reset();
-    };
-
-    window.onclick = function(event) {
-        if (event.target == popup) {
-            popup.style.display = "none";
-            document.getElementById("editForm").reset();
-            document.querySelectorAll('.editBtn.hidden').forEach(btn => btn.classList.remove('hidden'));
-            document.querySelectorAll('.deleteBtn.hidden').forEach(btn => btn.classList.remove('hidden'));
-        }
-    };
-
-    // On form submit
-    document.getElementById("editForm").addEventListener("submit", function(event) {
-        event.preventDefault();
-
-        const formData = new FormData(this);
-        const postId = this.dataset.id; // Get the post id
-
-        if (postId) {
-            formData.append("id", postId);
-
-            fetch(`http://127.0.0.1:8000/api/volunteer/${postId}`, {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log('Operation successful:', data);
-                location.reload(); // Reload the page after editing
-            })
-            .catch(error => {
-                console.error('An error occurred:', error);
-            });
-        } else {
-            console.error('Post id not specified.');
-        }
-
-        popup.style.display = "none";
-        document.querySelectorAll('.editBtn.hidden').forEach(btn => btn.classList.remove('hidden'));
-        document.querySelectorAll('.deleteBtn.hidden').forEach(btn => btn.classList.remove('hidden'));
-    });
-
-    
-    
-    function deletePost(button) {
-        const postId = button.getAttribute('data-id');
-        if (confirm('Are you sure you want to delete this post?')) {
-            fetch(`http://127.0.0.1:8000/api/volunteer/${postId}`, {
-                method: 'DELETE',
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log('Post deleted:', data);
-                location.reload();
-            })
-            .catch(error => {
-                console.error('An error occurred:', error);
-            });
-        }
+        resetButtonsAndForm();
     }
-</script>
+};
+
+function resetButtonsAndForm() {
+    document.getElementById("editForm").reset();
+    document.querySelectorAll('.editBtn.hidden').forEach(btn => btn.classList.remove('hidden'));
+    document.querySelectorAll('.deleteBtn.hidden').forEach(btn => btn.classList.remove('hidden'));
+}
+
+document.getElementById("editForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    const formData = new FormData(this);
+    const postId = this.dataset.id; 
+
+    if (postId) {
+        fetch(`http://127.0.0.1:8000/api/news/${postId}`, {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Operation successful:', data);
+            location.reload(); 
+        })
+        .catch(error => {
+            console.error('An error occurred:', error);
+        });
+    } else {
+        console.error('Post id not specified.');
+    }
+
+    const popup = document.getElementById("editPopup");
+    popup.style.display = "none";
+    resetButtonsAndForm();
+});
+
+function deletePost(button) {
+    const postId = button.getAttribute('data-id');
+    if (confirm('Are you sure you want to delete this post?')) {
+        fetch(`http://127.0.0.1:8000/api/news/${postId}`, {
+            method: 'DELETE',
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Post deleted:', data);
+            location.reload();
+        })
+        .catch(error => {
+            console.error('An error occurred:', error);
+        });
+    }
+}
+
+ </script> -->
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
 
 
       <!-- Footer Section Start -->

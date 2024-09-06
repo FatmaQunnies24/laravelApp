@@ -11,6 +11,8 @@ use App\Http\Controllers\DonationController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\AboutController;
+// use App\Http\Controllers\ReasonOfHelpingController;
 
 use App\Http\Controllers\DashboartController;
 use App\Http\Controllers\BeginningController;
@@ -48,12 +50,17 @@ Route::apiResource('volunteer', VolunteerController::class);
 Route::apiResource('beginning', BeginningController::class);
 Route::put('/beginning/{id}', [BeginningController::class, 'update'])->name('update');
 Route::post('/posts/{id}', [CharifitController::class, 'update']);
-Route::delete('/posts/{id}', [ReasonOfHelpingController::class, 'destroy']);
+Route::delete('/posts/{id}', [CharifitController::class, 'destroy']);
 Route::post('/activities/{id}', [ActivitiesController::class, 'update'])->name('activities.update');
 
 Route::apiResource('news', NewsController::class);
+Route::post('/news/{id}', [NewsController::class, 'update']);  
+Route::delete('/news/{id}', [NewsController::class, 'destroy']); 
 Route::apiResource('donation', DonationController::class);
 Route::apiResource('contact', ContactController::class);
+// Route::apiResource('about', AboutController::class);
+Route::apiResource('about', AboutController::class);
+Route::post('/about/{id}', [AboutController::class, 'update']);  
 
 Route::apiResource('blog', BlogController::class);
 // Route::apiResource('login', LoginController::class);

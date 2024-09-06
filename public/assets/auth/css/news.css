@@ -1,0 +1,207 @@
+/* Styles for news section */
+.news__areaa {
+    background: #F3FCF8;
+    padding: 40px 0;
+    display: flex;
+    gap: 20px;
+    padding-left: 5%;
+    padding-right: 5%;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.news__areaa::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}
+
+/* Styles for individual news items */
+.single__bloga {
+    background: #fff;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+    border-radius: 7px;
+    overflow: hidden;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    width: 50%;
+    position: relative;
+}
+
+.thuma {
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.thuma img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.newsinfoa {
+    padding: 20px;
+    width: 50%;
+    text-align: left;
+}
+
+.newsinfoa span {
+    font-size: 14px;
+    font-weight: 600;
+    color: #222222;
+    font-family: "Open Sans", sans-serif;
+}
+
+.newsinfoa h3 {
+    font-size: 20px;
+    color: #222222;
+    margin-top: 10px;
+    font-family: "Open Sans", sans-serif;
+    font-weight: bold;
+}
+
+.newsinfoa p {
+    font-size: 16px;
+    line-height: 1.5;
+    color: #7A7B7C;
+    margin: 15px 0;
+}
+
+.newsinfoa .read_morea {
+    font-size: 14px;
+    font-weight: 600;
+    color: #009688;
+    text-decoration: none;
+}
+
+.newsinfoa .read_morea:hover {
+    text-decoration: underline;
+}
+
+/* Styles for buttons (Edit and Delete) */
+.button-container {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    display: flex;
+    gap: 10px;
+}
+
+.button-container button {
+    background-color: #009688;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.button-container button.edit {
+    background-color: #FF9800; /* Orange color for edit */
+}
+
+.button-container button.delete {
+    background-color: #F44336; /* Red color for delete */
+}
+
+.button-container button:hover {
+    background-color: #00796B; /* Darker shade for general button hover */
+}
+
+.button-container button.edit:hover {
+    background-color: #E68A00; /* Darker orange for edit button hover */
+}
+
+.button-container button.delete:hover {
+    background-color: #C62828; /* Darker red for delete button hover */
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 767px) {
+    .news__areaa {
+        flex-direction: column;
+        padding-left: 5%;
+        padding-right: 5%;
+        width: 100%;
+    }
+
+    .single__bloga {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .thuma, 
+    .newsinfoa {
+        width: 100%;
+    }
+}
+
+/* Styles for the popup */
+.popup {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.popup-content {
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    position: relative;
+    width: 400px;
+}
+
+.popup-content .close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.popup-content h3 {
+    margin-top: 0;
+}
+
+.popup-content form {
+    display: flex;
+    flex-direction: column;
+}
+
+.popup-content label {
+    margin-bottom: 5px;
+}
+
+.popup-content input, 
+.popup-content textarea {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.popup-content button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #009688;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.popup-content button:hover {
+    background-color: #00796B;
+}

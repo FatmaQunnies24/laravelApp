@@ -47,4 +47,66 @@ class NewsController extends Controller
             ], 400);
         }
     }
+
+
+    public function update(Request $request, $id)
+{
+    $_News = News::find($id);
+
+    if (!$_News) {
+        return response()->json([
+            'status' => false,
+            'message' => 'News not found'
+        ], 404);
+    }
+
+    $formattedDate = Carbon::parse($request->date)->format('Y-m-d');
+
+    if ($request->hasFile('imgUrl')) {
+        if (Storage::disk('public')->exists($_News->imgUrl)) {
+            Storage::disk('public')->delete($_News->imgUrl);
+        }
+
+        $image = $request->file('imgUrl');
+        $imageName = time().'.'.$image->extension();
+        Storage::disk('public')->put($imageName, file_get_contents($image));
+
+        $_News->imgUrl = $imageName;
+    }
+
+    $_News->name = $request->name;
+    $_News->date = $formattedDate;
+    $_News->desc = $request->desc;
+
+    $_News->save();
+
+    return response()->json([
+        'status' => true,
+        'message' => 'News updated successfully',
+        'News' => $_News
+    ], 200);
+}
+public function destroy($id)
+{
+    $_News = News::find($id);
+
+    if (!$_News) {
+        return response()->json([
+            'status' => false,
+            'message' => 'News not found'
+        ], 404);
+    }
+
+    if (Storage::disk('public')->exists($_News->imgUrl)) {
+        Storage::disk('public')->delete($_News->imgUrl);
+    }
+
+    $_News->delete();
+
+    return response()->json([
+        'status' => true,
+        'message' => 'News deleted successfully'
+    ], 200);
+}
+
 }
