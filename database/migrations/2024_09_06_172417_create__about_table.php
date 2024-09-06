@@ -15,12 +15,12 @@ return new class extends Migration
     {
         Schema::create('_about', function (Blueprint $table) {
             $table->id();
-            $table->string("phone");
-            $table->string("email");
-            $table->string("facebook");
-            $table->string("pinterest");
-            $table->string("linkedin");
-            $table->string("twitter");
+            $table->string("phone")->nullable();;
+            $table->string("email")->nullable();;
+            $table->string("facebook")->nullable();;
+            $table->string("pinterest")->nullable();;
+            $table->string("linkedin")->nullable();;
+            $table->string("twitter")->nullable();;
 
             $table->timestamps();
         });
