@@ -144,3 +144,73 @@
 .our_volunteer_area .single_volunteer .volunteer_info .edit-delete-buttons button:hover {
     background-color: #0056b3;
 }
+
+
+
+.creative_blog-form-wrapper {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px; /* يمكنك تغيير العرض حسب الحاجة */
+    margin: auto; /* توسيط النموذج */
+}
+
+.creative_blog-form-wrapper h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+    font-size: 24px;
+}
+
+.creative_blog-form-wrapper label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #555;
+}
+
+.creative_blog-form-wrapper input[type="text"],
+.creative_blog-form-wrapper textarea,
+.creative_blog-form-wrapper input[type="url"],
+.creative_blog-form-wrapper input[type="file"] {
+    width: calc(100% - 24px); /* ضبط العرض مع الأخذ في الاعتبار الحشو */
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.creative_blog-form-wrapper textarea {
+    resize: vertical;
+    height: 100px;
+}
+
+.creative_blog-form-wrapper button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.creative_blog-form-wrapper .submit-btn {
+    background-color: #007bff;
+    color: #fff;
+    transition: background-color 0.3s;
+}
+
+.creative_blog-form-wrapper .submit-btn:hover {
+    background-color: #0056b3;
+}
+
+.creative_blog-form-wrapper .error-message {
+    color: #dc3545;
+    font-size: 14px;
+    margin-bottom: 15px;
+}

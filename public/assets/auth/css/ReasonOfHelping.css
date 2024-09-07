@@ -5,17 +5,23 @@
 
 .rowe {
     justify-content: center;
+    display: flex;
+    flex-wrap: wrap; /* يسمح بانتقال العناصر إلى السطر التالي */
+    gap: 10px;
+    margin-left: 15%;
 }
 
 @media (max-width: 767px) {
     .reson_area .single_reson {
         margin-bottom: 30px;
+        flex: 1 1 100%; /* عرض كامل على الشاشات الصغيرة */
     }
 }
 
 @media (min-width: 768px) and (max-width: 991px) {
     .reson_area .single_reson {
         margin-bottom: 40px;
+        
     }
 }
 

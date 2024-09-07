@@ -846,8 +846,66 @@
 
 
 <!-- reasone page -->
+<!-- 
+<div class="creative_blog-form-wrapper">
+    <h2>Create New Reason of Helping</h2>
+    <form id="newReasonForm" enctype="multipart/form-data">
+        <div class="alert-message" id="alert-message"></div>
+        
+        <label for="newName">Reason Name:</label>
+        <input type="text" id="newName" name="name" placeholder="Enter Reason Name" class="input-field" required>
 
-<!-- <div class="reson_area" style="width: 100%; margin-left: 15%; display: flex; gap: 10px; flex-wrap: wrap;">
+        <label for="newDescription">Description:</label>
+        <textarea id="newDescription" name="desc" placeholder="Enter Description" class="text-field" required></textarea>
+
+        <label for="newImage">Image:</label>
+        <input type="file" id="newImage" name="image" accept="image/*" class="file-input" required>
+
+        <button type="submit" class="primary-btn">Create Reason</button>
+    </form>
+</div>
+<script>document.getElementById("newReasonForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    document.getElementById('alert-message').textContent = '';
+
+    const formData = new FormData(this);
+
+    // Optional: Adding current date to the form data
+    const createdDate = new Date().toISOString().split('T')[0];
+    formData.append('created_at', createdDate);
+
+    fetch('http://127.0.0.1:8000/api/posts', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('Reason created successfully:', data);
+        alert('Reason created successfully!');
+        this.reset();
+        location.reload();
+    })
+    .catch(error => {
+        console.error('Error occurred:', error);
+        document.getElementById('alert-message').textContent = 'An error occurred. Please try again.';
+    });
+});
+
+function resetForm() {
+    document.getElementById("newReasonForm").reset();
+    document.getElementById('alert-message').textContent = '';
+}
+</script>
+
+
+
+<div class="reson_area" style="width: 100%; margin-left: 15%; display: flex; gap: 10px; flex-wrap: wrap;">
 </div>
 
 <div id="editPopup" class="popup">
@@ -855,6 +913,7 @@
         <span class="close">&times;</span>
         <h3>Edit Post</h3>
         <form id="editForm">
+            <input type="hidden" id="editPostId" name="id">
             <label for="editName">Name:</label>
             <input type="text" id="editName" name="name" required><br><br>
             
@@ -933,7 +992,7 @@
             event.preventDefault();
 
             const formData = new FormData(this);
-            const postId = document.querySelector('.editBtn.hidden')?.getAttribute('data-id');
+            const postId = document.getElementById("editPostId").value;  // استخدام الحقل المخفي للحصول على postId
             if (postId) {
                 formData.append("id", postId);
                 
@@ -951,7 +1010,7 @@
                 })
                 .then(data => {
                     console.log('Success:', data);
-                    location.reload();
+                    // location.reload();
                 })
                 .catch(error => {
                     console.error('Error:', error);
@@ -983,6 +1042,7 @@
         document.getElementById("editName").value = button.getAttribute('data-name');
         document.getElementById("editDesc").value = button.getAttribute('data-desc');
         document.getElementById("editImg").value = ''; 
+        document.getElementById("editPostId").value = postId;  // تعيين postId للحقل المخفي
         document.getElementById("editPopup").style.display = "block";
 
         document.querySelectorAll('.editBtn').forEach(btn => btn.classList.add('hidden'));
@@ -991,6 +1051,7 @@
 
     function deletePost(button) {
         const postId = button.getAttribute('data-id');
+        console.log('ID passed to function:', postId); 
         if (confirm('Are you sure you want to delete this post?')) {
             fetch(`http://127.0.0.1:8000/api/posts/${postId}`, {
                 method: 'DELETE',
@@ -1201,8 +1262,73 @@
 
 
 <!-- causes  -->
+<div class="creative_blog-form-wrapper">
+    <h2>Create New Cause</h2>
+    <form id="newCauseForm" enctype="multipart/form-data">
+        <div class="alert-message" id="alert-message"></div>
 
-<!-- <div class="causes-container" id="causes-container"></div>
+        <label for="newName">Cause Name:</label>
+        <input type="text" id="newName" name="name" placeholder="Enter Cause Name" class="input-field" required>
+
+        <label for="newRaised">Amount Raised:</label>
+        <input type="text" id="newRaised" name="raised" placeholder="Enter Amount Raised" class="input-field" required>
+
+        <label for="newGoal">Goal:</label>
+        <input type="text" id="newGoal" name="goal" placeholder="Enter Goal" class="input-field" required>
+
+        <label for="newPre">Progress:</label>
+        <input type="text" id="newPre" name="pre" placeholder="Enter Progress Percentage" class="input-field" required>
+
+        <label for="newImage">Image:</label>
+        <input type="file" id="newImage" name="imgUrl" accept="image/*" class="file-input" required>
+
+        <label for="newSmallDisc">Small Description:</label>
+        <textarea id="newSmallDisc" name="smallDisc" placeholder="Enter Small Description" class="text-field" required></textarea>
+
+        <label for="newDescription">Description:</label>
+        <textarea id="newDescription" name="desc" placeholder="Enter Full Description" class="text-field" required></textarea>
+
+        <button type="submit" class="primary-btn">Create Cause</button>
+    </form>
+</div>
+
+
+<script>
+   document.getElementById("newCauseForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+    
+    // Clear previous alert messages
+    document.getElementById('alert-message').textContent = '';
+
+    const formData = new FormData(this);
+
+    fetch('http://127.0.0.1:8000/api/causes', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('Cause created successfully:', data);
+        alert('Cause created successfully!');
+        this.reset();
+    })
+    .catch(error => {
+        console.error('Error occurred:', error);
+        document.getElementById('alert-message').textContent = 'An error occurred. Please try again.';
+    });
+});
+
+</script>
+
+
+
+
+<div class="causes-container" id="causes-container"></div>
 <div class="container mt-4">
     <div class="causes-container" id="causes-container"></div>
 </div>
@@ -1258,7 +1384,7 @@
 
 
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function() {
     fetch('http://127.0.0.1:8000/api/causes')
         .then(response => {
             if (!response.ok) {
@@ -1310,7 +1436,7 @@
                         document.getElementById('edit_pre').value = this.getAttribute('data-pre');
                         document.getElementById('edit_smallDisc').value = this.getAttribute('data-smalldisc');
                         document.getElementById('edit_desc').value = this.getAttribute('data-desc');
-                        document.getElementById('edit_imgUrl').value = this.getAttribute('data-imgurl');
+                        // handle image URL separately if needed
                     });
                 });
 
@@ -1343,17 +1469,29 @@
             }
         })
         .catch(error => console.error('Error fetching causes:', error));
-    });
+});
 
 document.getElementById('editForm').addEventListener('submit', function(e) {
     e.preventDefault();
 
     const id = document.getElementById('edit_id').value;
-    const formData = new FormData(this); 
+    const data = {
+        name: document.getElementById('edit_name').value,
+        raised: document.getElementById('edit_raised').value,
+        goal: document.getElementById('edit_goal').value,
+        pre: document.getElementById('edit_pre').value,
+        smallDisc: document.getElementById('edit_smallDisc').value,
+        desc: document.getElementById('edit_desc').value,
+        imgUrl: document.getElementById('edit_imgUrl').files[0] ? document.getElementById('edit_imgUrl').files[0].name : ''
+    };
 
     fetch(`http://127.0.0.1:8000/api/causes/${id}`, {
-        method: 'POST',
-        body: formData
+        method: 'PUT',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
     })
     .then(response => response.json())
     .then(data => {
@@ -1367,7 +1505,8 @@ document.getElementById('editForm').addEventListener('submit', function(e) {
     .catch(error => console.error('Error updating cause:', error));
 });
 
-</script> -->
+
+</script>
 
 
 
@@ -1390,7 +1529,79 @@ document.getElementById('editForm').addEventListener('submit', function(e) {
 
 
 <!-- volunteer-->
-<!-- <div class="reson_area" style="width: 100%; margin-left: 15%; display: flex; gap: 10px; flex-wrap: wrap;"></div>
+
+<!-- 
+<div class="creative_blog-form-wrapper">
+    <h2>Create New Volunteer</h2>
+    <form id="newBlogForm" enctype="multipart/form-data">
+        <div class="alert-message" id="alert-message"></div>
+        
+        <label for="newName">Volunteer Name:</label>
+        <input type="text" id="newName" name="name" placeholder="Enter Volunteer Name" class="input-field" required>
+
+        <label for="newDescription">info:</label>
+        <textarea id="newDescription" name="info" placeholder="Write New info" class="text-field" required></textarea>
+
+        <label for="newImage">Image:</label>
+        <input type="file" id="newImage" name="imgUrl" accept="image/*" class="file-input" required>
+
+        <label for="newFacebook">Facebook:</label>
+        <input type="url" id="newFacebook" name="facebook" placeholder="Enter Facebook URL" class="input-field">
+
+        <label for="newPinterest">Pinterest:</label>
+        <input type="url" id="newPinterest" name="pinterest" placeholder="Enter Pinterest URL" class="input-field">
+
+        <label for="newLinkedIn">LinkedIn:</label>
+        <input type="url" id="newLinkedIn" name="linkedin" placeholder="Enter LinkedIn URL" class="input-field">
+
+        <label for="newTwitter">Twitter:</label>
+        <input type="url" id="newTwitter" name="twitter" placeholder="Enter Twitter URL" class="input-field">
+
+        <button type="submit" class="primary-btn">Create Volunteer</button>
+    </form>
+</div>
+
+
+<script>
+    document.getElementById("newBlogForm").addEventListener("submit", function (event) {
+        event.preventDefault();
+        
+        document.getElementById('alert-message').textContent = '';
+
+        const formData = new FormData(this);
+
+        const createdDate = new Date().toISOString().split('T')[0];
+        formData.append('date', createdDate);
+
+        fetch('http://127.0.0.1:8000/api/volunteer', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('volunteer created successfully:', data);
+            alert('volunteer created successfully!');
+            this.reset();
+            location.reload();
+        })
+        .catch(error => {
+            console.error('Error occurred:', error);
+            document.getElementById('alert-message').textContent = 'An error occurred. Please try again.';
+        });
+    });
+
+    function resetForm() {
+        document.getElementById("newBlogForm").reset();
+        document.getElementById('alert-message').textContent = '';
+    }
+</script>
+
+<div class="reson_area" style="width: 100%; margin-left: 15%; display: flex; gap: 10px; flex-wrap: wrap;"></div>
 
 <div id="editPopup" class="popup" style="display: none;">
     <div class="popup-content">
@@ -1597,13 +1808,80 @@ document.getElementById('editForm').addEventListener('submit', function(e) {
 
 
 
+<!-- new-->
+
+<!-- <div class="unique_blog-form-container">
+    <h2>Create New </h2>
+    <form id="createBlogForm" enctype="multipart/form-data">
+        <div class="error-message" id="error-message"></div>
+        
+        <label for="name">New Name:</label>
+        <input type="text" id="name" name="name" placeholder="Enter New name" required>
+
+        <label for="description">Description:</label>
+        <textarea id="description" name="desc" placeholder="Write New description" required></textarea>
+
+        <label for="image">Image:</label>
+        <input type="file" id="image" name="imgUrl" accept="image/*" required>
+
+        <button type="submit" class="submit-btn">Create New</button>
+    </form>
+</div>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+});
+
+document.getElementById("createBlogForm").addEventListener("submit", function (event) {
+    event.preventDefault();
+    
+    document.getElementById('error-message').textContent = '';
+
+    const formData = new FormData(this);
+
+    const createdDate = new Date().toISOString().split('T')[0];
+    formData.append('date', createdDate);
+
+    fetch('http://127.0.0.1:8000/api/news', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('new created successfully:', data);
+        alert('New created successfully!');
+        this.reset();
+        location.reload();
+    })
+    .catch(error => {
+        console.error('Error occurred:', error);
+        document.getElementById('error-message').textContent = 'An error occurred. Please try again.';
+    });
+});
+
+function resetForm() {
+    document.getElementById("createBlogForm").reset();
+    document.getElementById('error-message').textContent = '';
+}
+
+</script>
 
 
 
 
 
-<!-- volunteer-->
-<!-- <div class="news__areaa" style="width: 100%; margin-left: 15%; display: flex; gap: 10px; flex-wrap: wrap;"></div>
+
+
+
+
+
+<div class="news__areaa" style="width: 100%; margin-left: 15%; display: flex; gap: 10px; flex-wrap: wrap;"></div>
 
 <div id="editPopup" class="popup" style="display: none;">
     <div class="popup-content">
@@ -1770,7 +2048,7 @@ function deletePost(button) {
 
 
 
-
+  <!-- blog-->
  <!-- <div class="form-container">
         <h1>Edit Information</h1>
         <form id="edit-form" method="POST" action="http://127.0.0.1:8000/api/about/1">
@@ -1841,24 +2119,9 @@ function deletePost(button) {
 
 
  
+  
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <!-- blog-->
-
-    <div class="weird_form-container">
+    <!-- <div class="weird_form-container">
     <h2>Create New Blog</h2>
     <form id="createBlogForm" enctype="multipart/form-data">
         <div class="error-message" id="error-message"></div>
@@ -1872,10 +2135,7 @@ function deletePost(button) {
         <label for="style">Style:</label>
         <input type="text" id="style" name="style" placeholder="Enter blog style" required>
 
-        <!-- <label for="date">Date:</label>
-        <input type="date" id="date" name="date" required> -->
-
-        <label for="image">Image:</label>
+               <label for="image">Image:</label>
         <input type="file" id="image" name="imgUrl" accept="image/*" required>
 
         <button type="submit" class="submit-btn">Create Blog</button>
@@ -2094,7 +2354,7 @@ function deletePost(button) {
     }
 }
 
-</script>
+</script> -->
 
 
 
