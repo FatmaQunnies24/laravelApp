@@ -6,7 +6,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
       <title>dashboard</title>
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
+@section('content')
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -771,8 +771,8 @@
 
 
 
-
-      <!--  beginning   -->
+  <!-- @yield('content') -->
+       <!-- beginning   -->
       <!-- <div class="form-wrapper">
     <h1 class="form-title">Edit Beginning</h1>
     <form id="edit-form" action="{{ route('update', ['id' => 1]) }}" method="POST">
@@ -794,6 +794,8 @@
             <input type="submit" value="Update" class="form-submit">
         </div>
     </form>
+  
+
 </div>
 
 
@@ -846,8 +848,8 @@
 
 
 <!-- reasone page -->
-<!-- 
-<div class="creative_blog-form-wrapper">
+
+<!-- <div class="creative_blog-form-wrapper">
     <h2>Create New Reason of Helping</h2>
     <form id="newReasonForm" enctype="multipart/form-data">
         <div class="alert-message" id="alert-message"></div>
@@ -859,7 +861,7 @@
         <textarea id="newDescription" name="desc" placeholder="Enter Description" class="text-field" required></textarea>
 
         <label for="newImage">Image:</label>
-        <input type="file" id="newImage" name="image" accept="image/*" class="file-input" required>
+        <input type="file" id="newImage" name="file" accept="image/*" class="file-input" required>
 
         <button type="submit" class="primary-btn">Create Reason</button>
     </form>
@@ -921,7 +923,7 @@ function resetForm() {
             <textarea id="editDesc" name="desc" required></textarea><br><br>
             
             <label for="editImg">Image:</label>
-            <input type="file" id="editImg" name="imgUrl"><br><br>
+            <input type="file" id="editImg" name="file"><br><br>
             
             <button type="submit">Submit</button>
         </form>
@@ -948,7 +950,7 @@ function resetForm() {
                     div.innerHTML = `
                         <div class="thume">
                             <div class="thum_1e">
-                                <img src="{{ asset('assets/auth') }}${item.imgUrl}" alt="${item.name}" />
+                                <img src="${item.imgUrl}" alt="${item.name}" />
                             </div>
                         </div>
                         <div class="help_contente">
@@ -992,7 +994,7 @@ function resetForm() {
             event.preventDefault();
 
             const formData = new FormData(this);
-            const postId = document.getElementById("editPostId").value;  // استخدام الحقل المخفي للحصول على postId
+            const postId = document.getElementById("editPostId").value;  
             if (postId) {
                 formData.append("id", postId);
                 
@@ -1010,7 +1012,7 @@ function resetForm() {
                 })
                 .then(data => {
                     console.log('Success:', data);
-                    // location.reload();
+                    location.reload();
                 })
                 .catch(error => {
                     console.error('Error:', error);
@@ -1042,7 +1044,7 @@ function resetForm() {
         document.getElementById("editName").value = button.getAttribute('data-name');
         document.getElementById("editDesc").value = button.getAttribute('data-desc');
         document.getElementById("editImg").value = ''; 
-        document.getElementById("editPostId").value = postId;  // تعيين postId للحقل المخفي
+        document.getElementById("editPostId").value = postId;  
         document.getElementById("editPopup").style.display = "block";
 
         document.querySelectorAll('.editBtn').forEach(btn => btn.classList.add('hidden'));
@@ -1078,7 +1080,7 @@ function resetForm() {
 
 
 
-<!-- case -->
+<!-- latest_activites_area -->
 
 <!-- <script src="https://www.youtube.com/iframe_api"></script>
 
@@ -1262,7 +1264,7 @@ function resetForm() {
 
 
 <!-- causes  -->
-<div class="creative_blog-form-wrapper">
+<!-- <div class="creative_blog-form-wrapper">
     <h2>Create New Cause</h2>
     <form id="newCauseForm" enctype="multipart/form-data">
         <div class="alert-message" id="alert-message"></div>
@@ -1280,7 +1282,7 @@ function resetForm() {
         <input type="text" id="newPre" name="pre" placeholder="Enter Progress Percentage" class="input-field" required>
 
         <label for="newImage">Image:</label>
-        <input type="file" id="newImage" name="imgUrl" accept="image/*" class="file-input" required>
+        <input type="file" id="newImage" name="file" accept="image/*" class="file-input" required>
 
         <label for="newSmallDisc">Small Description:</label>
         <textarea id="newSmallDisc" name="smallDisc" placeholder="Enter Small Description" class="text-field" required></textarea>
@@ -1292,12 +1294,10 @@ function resetForm() {
     </form>
 </div>
 
-
 <script>
-   document.getElementById("newCauseForm").addEventListener("submit", function(event) {
+document.getElementById("newCauseForm").addEventListener("submit", function(event) {
     event.preventDefault();
     
-    // Clear previous alert messages
     document.getElementById('alert-message').textContent = '';
 
     const formData = new FormData(this);
@@ -1322,16 +1322,9 @@ function resetForm() {
         document.getElementById('alert-message').textContent = 'An error occurred. Please try again.';
     });
 });
-
 </script>
 
-
-
-
 <div class="causes-container" id="causes-container"></div>
-<div class="container mt-4">
-    <div class="causes-container" id="causes-container"></div>
-</div>
 
 <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable" role="document">
@@ -1370,18 +1363,15 @@ function resetForm() {
                         <textarea class="form-control" id="edit_desc" rows="4"></textarea>
                     </div>
                     <div class="form-group">
-                        <label for="edit_imgUrl">Image URL</label>
+                        <label for="edit_imgUrl">Image</label>
                         <input type="file" class="form-control" id="edit_imgUrl">
                     </div>
                     <button type="submit" class="btn btn-primary">Save Changes</button>
-                    <button type="button" class="btn btn-danger" id="deleteButton">Delete Cause</button>
                 </form>
             </div>
         </div>
     </div>
 </div>
-    
-
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
@@ -1402,7 +1392,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     causeElement.setAttribute('key', cause.id);
                     causeElement.innerHTML = `
                         <div class="thumb">
-                            <img src="{{ asset('assets/auth') }}${cause.imgUrl}" alt=""/>
+                            <img src="${cause.imgUrl}" alt=""/>
                         </div>
                         <div class="causes_content">
                             <div class="custom_progress_bar">
@@ -1436,7 +1426,6 @@ document.addEventListener('DOMContentLoaded', function() {
                         document.getElementById('edit_pre').value = this.getAttribute('data-pre');
                         document.getElementById('edit_smallDisc').value = this.getAttribute('data-smalldisc');
                         document.getElementById('edit_desc').value = this.getAttribute('data-desc');
-                        // handle image URL separately if needed
                     });
                 });
 
@@ -1475,23 +1464,23 @@ document.getElementById('editForm').addEventListener('submit', function(e) {
     e.preventDefault();
 
     const id = document.getElementById('edit_id').value;
-    const data = {
-        name: document.getElementById('edit_name').value,
-        raised: document.getElementById('edit_raised').value,
-        goal: document.getElementById('edit_goal').value,
-        pre: document.getElementById('edit_pre').value,
-        smallDisc: document.getElementById('edit_smallDisc').value,
-        desc: document.getElementById('edit_desc').value,
-        imgUrl: document.getElementById('edit_imgUrl').files[0] ? document.getElementById('edit_imgUrl').files[0].name : ''
-    };
+    const formData = new FormData(); 
+
+    formData.append('name', document.getElementById('edit_name').value);
+    formData.append('raised', document.getElementById('edit_raised').value);
+    formData.append('goal', document.getElementById('edit_goal').value);
+    formData.append('pre', document.getElementById('edit_pre').value);
+    formData.append('smallDisc', document.getElementById('edit_smallDisc').value);
+    formData.append('desc', document.getElementById('edit_desc').value);
+
+    const fileInput = document.getElementById('edit_imgUrl');
+    if (fileInput.files.length > 0) {
+        formData.append('file', fileInput.files[0]); 
+    }
 
     fetch(`http://127.0.0.1:8000/api/causes/${id}`, {
-        method: 'PUT',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
+        method: 'POST',
+        body: formData 
     })
     .then(response => response.json())
     .then(data => {
@@ -1505,8 +1494,8 @@ document.getElementById('editForm').addEventListener('submit', function(e) {
     .catch(error => console.error('Error updating cause:', error));
 });
 
+</script> -->
 
-</script>
 
 
 
@@ -1822,7 +1811,7 @@ document.getElementById('editForm').addEventListener('submit', function(e) {
         <textarea id="description" name="desc" placeholder="Write New description" required></textarea>
 
         <label for="image">Image:</label>
-        <input type="file" id="image" name="imgUrl" accept="image/*" required>
+        <input type="file" id="image" name="file" accept="image/*" required>
 
         <button type="submit" class="submit-btn">Create New</button>
     </form>
@@ -1895,7 +1884,7 @@ function resetForm() {
             <textarea id="editDesc" name="desc" required></textarea><br><br>
 
             <label for="editImg">Image:</label>
-            <input type="file" id="editImg" name="imgUrl"><br><br>
+            <input type="file" id="editImg" name="file"><br><br>
 
             <button type="submit">Submit</button>
         </form>
@@ -1920,7 +1909,7 @@ function resetForm() {
                 div.className = 'single__bloga';
                 div.innerHTML = `
                     <div class="thuma">
-                        <img src="{{ asset('assets/auth') }}${item.imgUrl}" alt="${item.name}"/>
+                        <img src="${item.imgUrl}" alt="${item.name}"/>
                     </div>
                     <div class="newsinfoa">
                         <span>${item.date}</span>
@@ -2121,6 +2110,11 @@ function deletePost(button) {
  
   
 
+
+
+
+
+    
     <!-- <div class="weird_form-container">
     <h2>Create New Blog</h2>
     <form id="createBlogForm" enctype="multipart/form-data">
@@ -2136,7 +2130,7 @@ function deletePost(button) {
         <input type="text" id="style" name="style" placeholder="Enter blog style" required>
 
                <label for="image">Image:</label>
-        <input type="file" id="image" name="imgUrl" accept="image/*" required>
+        <input type="file" id="image" name="file" accept="image/*" required>
 
         <button type="submit" class="submit-btn">Create Blog</button>
     </form>
@@ -2210,7 +2204,7 @@ function resetForm() {
             <input type="date" id="editDate" name="date" required><br><br>
 
             <label for="editImg">Image:</label>
-            <input type="file" id="editImg" name="imgUrl"><br><br>
+            <input type="file" id="editImg" name="file"><br><br>
 
             <button type="submit">Submit</button>
         </form>
@@ -2236,7 +2230,7 @@ function resetForm() {
 
                 div.innerHTML = `
                     <div class="blog_item_img">
-                        <img src="{{ asset('assets/auth') }}${blog.imgUrl}" alt="${blog.name}" style="width: 100%; height: auto;">
+                        <img src="${blog.imgUrl}" alt="${blog.name}" style="width: 100%; height: auto;">
                     </div>
                     <div class="blog_details">
                         <h2>${blog.name}</h2>
@@ -2354,7 +2348,7 @@ function deletePost(button) {
     }
 }
 
-</script> -->
+</script>  -->
 
 
 

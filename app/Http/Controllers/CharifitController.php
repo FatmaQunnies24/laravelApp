@@ -9,7 +9,12 @@ use Illuminate\Support\Facades\Storage;
 
 class CharifitController extends Controller
 {
-    
+    protected $Controller;
+    public function __construct()
+    {
+        $this->Controller = app(Controller::class);
+    }
+
     public function index()
     {
         $_reason_of_helping = Reason_of_helping::take(3)->get();
@@ -26,29 +31,28 @@ class CharifitController extends Controller
     public function store(Request $request)
     {
 
-            // if($request->has('image')){
-                $imageName = time().'.'.$request->image->extension();
-                Storage::disk('public')->put($imageName, file_get_contents($request->image));
-    
-                $_reason_of_helping =  Reason_of_helping::create([
-                    'name' => $request->name,
-                    'desc' => $request->desc,
-                    'imgUrl' => $imageName,
-                ]);
-    
-                return response()->json([
-                    'status' => true,
-                    'message' => ' reason_of_helping Created successfully',
-                    'reason_of_helping' => $_reason_of_helping
-                ], 201);
-     
-    
-                return response()->json([
-                    'status' => true,
-                    'message' => 'reason_of_helping Created successfully',
-                    'reason_of_helping' => $_reason_of_helping
-                ], 201);
-           
+        $uploadResponse = $this->Controller->uploadImage($request);
+
+        if (!$uploadResponse->getData()->status) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Image upload failed'
+            ], 500);
+        }
+
+        $imageUrl = $uploadResponse->getData()->url;
+
+        $_reason_of_helping = Reason_of_helping::create([
+            'name' => $request->name,
+            'desc' => $request->desc,
+            'imgUrl' => $imageUrl,
+        ]);
+
+        return response()->json([
+            'status' => true,
+            'message' => 'reason_of_helping Created successfully',
+            'reason_of_helping' => $_reason_of_helping
+        ], 201);
         
 
         
@@ -56,18 +60,25 @@ class CharifitController extends Controller
 
     public function update(Request $request, $id)
     {
-       
         $reason_of_helping = Reason_of_helping::findOrFail($id);
-            $imageName = $reason_of_helping->imgUrl; // الحفاظ على الاسم الأصلي للصورة القديمة
-   if ($request->hasFile('imgUrl')) {
-            $imageName = time() . '.' . $request->imgUrl->extension();
-            $destinationPath = public_path('assets/auth/images');
-            $request->imgUrl->move($destinationPath, $imageName);
+        $imageUrl = $reason_of_helping->imgUrl;
+        if ($request->hasFile('file')) {
+        $uploadResponse = $this->Controller->uploadImage($request);
+
+        if (!$uploadResponse->getData()->status) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Image upload failed'
+            ], 500);
         }
+
+        $imageUrl = $uploadResponse->getData()->url;
+    }
+        
         $reason_of_helping->update([
-            'name' =>  $request->input('name'),
-            'desc' =>  $request->input('desc'),
-            'imgUrl' => $imageName,
+            'name' => $request->input('name'),
+            'desc' => $request->input('desc'),
+            'imgUrl' => $imageUrl,
         ]);
 
         return response()->json([
@@ -82,21 +93,35 @@ class CharifitController extends Controller
 {
     $reason_of_helping = Reason_of_helping::findOrFail($id);
 
-    $imagePath = public_path('assets/auth/images/' . $reason_of_helping->imgUrl);
+        $imageUrl = $reason_of_helping->imgUrl;
+        $publicId = $this->extractPublicId($imageUrl);
 
-    if (file_exists($imagePath)) {
-        unlink($imagePath);
-    }
+        $cloudinaryResponse = cloudinary()->destroy($publicId);
 
-    $reason_of_helping->delete();
+        if ($cloudinaryResponse['result'] !== 'ok') {
+            return response()->json([
+                'status' => false,
+                'message' => 'Failed to delete image from Cloudinary'
+            ], 500);
+        }
 
-    return response()->json([
-        'status' => true,
-        'message' => 'deleted successfully'
-    ], 200);
-}
+        $reason_of_helping->delete();
 
+        return response()->json([
+            'status' => true,
+            'message' => 'deleted successfully'
+        ], 200);
 
 
 
 }    
+
+private function extractPublicId($imageUrl)
+{ $parts = explode('/', $imageUrl);
+    $fileNameWithExtension = end($parts);
+    $publicId = pathinfo($fileNameWithExtension, PATHINFO_FILENAME);
+    return $publicId;
+}
+
+
+}

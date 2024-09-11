@@ -8,6 +8,12 @@ use Carbon\Carbon;
 
 class CommentController extends Controller
 {
+    
+    protected $Controller;
+    public function __construct()
+    {
+        $this->Controller = app(Controller::class);
+    }
     public function index()
     {
       
@@ -21,19 +27,22 @@ class CommentController extends Controller
     
         public function store(Request $request)
         {
-            if($request->hasFile('imgUrl')) {
-                $image = $request->file('imgUrl');
-                $imageName = time().'.'.$image->extension();
-                Storage::disk('public')->put($imageName, file_get_contents($image));
-                // $formattedDate = Carbon::parse($request->date)->format('Y-m-d');
-    
+            $uploadResponse = $this->Controller->uploadImage($request);
+
+            if (!$uploadResponse->getData()->status) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Image upload failed'
+                ], 500);
+            }
+            $imageUrl = $uploadResponse->getData()->url;
                 $_Comment =  Comment::create([
                     'username' => $request->username,
                     'blog_id' =>$request->blog_id,
                     'email' => $request->email,
                     'disc' =>$request->disc,
                     'website' => $request->website,
-                    'imgUrl' => $imageName,
+                    'imgUrl' => $imageUrl,
 
                    
                     
@@ -45,12 +54,7 @@ class CommentController extends Controller
                     'message' => 'Comment Created successfully',
                     'Comment' => $_Comment
                 ], 201);
-            } else {
-                return response()->json([
-                    'status' => false,
-                    'message' => 'No image uploaded'
-                ], 400);
-            }
+        
         }
 
 
@@ -74,5 +78,10 @@ public function numComment($blogId)
         'comment_count' => $commentCount
     ], 200);
 }
-    }
+   
+
+
+
+
+}
     

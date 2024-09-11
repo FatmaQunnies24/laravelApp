@@ -9,6 +9,13 @@ use Illuminate\Support\Facades\Storage;
 use Carbon\Carbon;
 class BlogController extends Controller
 {
+
+    
+    protected $Controller;
+    public function __construct()
+    {
+        $this->Controller = app(Controller::class);
+    }
     public function index()
     {
       
@@ -22,16 +29,21 @@ class BlogController extends Controller
     
         public function store(Request $request)
         {
-            if($request->hasFile('imgUrl')) {
-                $image = $request->file('imgUrl');
-                $imageName = time().'.'.$image->extension();
-                Storage::disk('public')->put($imageName, file_get_contents($image));
+            $uploadResponse = $this->Controller->uploadImage($request);
+
+            if (!$uploadResponse->getData()->status) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Image upload failed'
+                ], 500);
+            }
+            $imageUrl = $uploadResponse->getData()->url;
                 $formattedDate = Carbon::parse($request->date)->format('Y-m-d');
     
                 $_Blog =  Blog::create([
                     'name' => $request->name,
                     'date' => $formattedDate,
-                    'imgUrl' => $imageName,
+                    'imgUrl' => $imageUrl,
                     'style' => $request->style,
                     'disc' =>$request->disc,
                    
@@ -43,12 +55,8 @@ class BlogController extends Controller
                     'message' => 'Blog Created successfully',
                     'Blog' => $_Blog
                 ], 201);
-            } else {
-                return response()->json([
-                    'status' => false,
-                    'message' => 'No image uploaded'
-                ], 400);
-            }
+           
+            
         }
 
 
@@ -80,18 +88,22 @@ public function update(Request $request, $id)
         ], 404);
     }
 
-    if ($request->hasFile('imgUrl')) {
-        if (Storage::disk('public')->exists($_Blog->imgUrl)) {
-            Storage::disk('public')->delete($_Blog->imgUrl);
-        }
+    $imageUrl = $_Blog->imgUrl;
+    if ($request->hasFile('file')) {
+    $uploadResponse = $this->Controller->uploadImage($request);
 
-        $image = $request->file('imgUrl');
-        $imageName = time() . '.' . $image->extension();
-        Storage::disk('public')->put($imageName, file_get_contents($image));
-        $_Blog->imgUrl = $imageName;
+    if (!$uploadResponse->getData()->status) {
+        return response()->json([
+            'status' => false,
+            'message' => 'Image upload failed'
+        ], 500);
     }
 
-    $formattedDate = Carbon::parse($request->date)->format('Y-m-d');
+    $imageUrl = $uploadResponse->getData()->url;
+}
+    
+        $_Blog->imgUrl = $imageUrl;
+ $formattedDate = Carbon::parse($request->date)->format('Y-m-d');
     $_Blog->name = $request->name;
     $_Blog->date = $formattedDate;
     $_Blog->style = $request->style;
@@ -116,9 +128,16 @@ public function destroy($id)
             'message' => 'Blog not found'
         ], 404);
     }
+    $imageUrl = $_Blog->imgUrl;
+    $publicId = $this->extractPublicId($imageUrl);
 
-    if (Storage::disk('public')->exists($_Blog->imgUrl)) {
-        Storage::disk('public')->delete($_Blog->imgUrl);
+    $cloudinaryResponse = cloudinary()->destroy($publicId);
+
+    if ($cloudinaryResponse['result'] !== 'ok') {
+        return response()->json([
+            'status' => false,
+            'message' => 'Failed to delete image from Cloudinary'
+        ], 500);
     }
 
     $_Blog->delete();
@@ -128,4 +147,15 @@ public function destroy($id)
         'message' => 'Blog deleted successfully'
     ], 200);
 }
+
+
+
+
+private function extractPublicId($imageUrl)
+{ $parts = explode('/', $imageUrl);
+    $fileNameWithExtension = end($parts);
+    $publicId = pathinfo($fileNameWithExtension, PATHINFO_FILENAME);
+    return $publicId;
+}
+
 }

@@ -16,6 +16,7 @@ use App\Http\Controllers\AboutController;
 
 use App\Http\Controllers\DashboartController;
 use App\Http\Controllers\BeginningController;
+use App\Http\Controllers\Controller;
 
 
 use App\Http\Controllers\BlogController;
@@ -80,3 +81,4 @@ Route::get('/commentcount/{blogId}', [CommentController::class, 'numComment']);
 Route::post('/logout', [LoginController::class, 'logoutUser'])->name('logoutUser');
 Route::post('/signIn', [LoginController::class, 'loginUser'])->name('loginUser');
 Route::get('/home', [DashboartController::class, 'index'])->name('home');
+Route::post('/upload-image', [Controller::class, 'uploadImage']);

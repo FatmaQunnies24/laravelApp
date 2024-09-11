@@ -9,6 +9,12 @@ use Carbon\Carbon;
 
 class NewsController extends Controller
 {
+    
+    protected $Controller;
+    public function __construct()
+    {
+        $this->Controller = app(Controller::class);
+    }
     public function index()
     {
         $_News = News::take(3)->get();
@@ -21,16 +27,21 @@ class NewsController extends Controller
 
     public function store(Request $request)
     {
-        if($request->hasFile('imgUrl')) {
-            $image = $request->file('imgUrl');
-            $imageName = time().'.'.$image->extension();
-            Storage::disk('public')->put($imageName, file_get_contents($image));
+        $uploadResponse = $this->Controller->uploadImage($request);
+
+        if (!$uploadResponse->getData()->status) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Image upload failed'
+            ], 500);
+        }
+        $imageUrl = $uploadResponse->getData()->url;
             $formattedDate = Carbon::parse($request->date)->format('Y-m-d');
 
             $_News =  News::create([
                 'name' => $request->name,
                 'date' => $formattedDate,
-                'imgUrl' => $imageName,
+                'imgUrl' => $imageUrl,
                 'desc' => $request->desc,
                 
             ]);
@@ -40,12 +51,7 @@ class NewsController extends Controller
                 'message' => 'News Created successfully',
                 'News' => $_News
             ], 201);
-        } else {
-            return response()->json([
-                'status' => false,
-                'message' => 'No image uploaded'
-            ], 400);
-        }
+   
     }
 
 
@@ -61,18 +67,23 @@ class NewsController extends Controller
     }
 
     $formattedDate = Carbon::parse($request->date)->format('Y-m-d');
+    $imageUrl = $_News->imgUrl;
+        if ($request->hasFile('file')) {
+        $uploadResponse = $this->Controller->uploadImage($request);
 
-    if ($request->hasFile('imgUrl')) {
-        if (Storage::disk('public')->exists($_News->imgUrl)) {
-            Storage::disk('public')->delete($_News->imgUrl);
+        if (!$uploadResponse->getData()->status) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Image upload failed'
+            ], 500);
         }
 
-        $image = $request->file('imgUrl');
-        $imageName = time().'.'.$image->extension();
-        Storage::disk('public')->put($imageName, file_get_contents($image));
-
-        $_News->imgUrl = $imageName;
+        $imageUrl = $uploadResponse->getData()->url;
     }
+        
+      
+        $_News->imgUrl = $imageUrl;
+    
 
     $_News->name = $request->name;
     $_News->date = $formattedDate;
@@ -96,9 +107,16 @@ public function destroy($id)
             'message' => 'News not found'
         ], 404);
     }
+    $imageUrl = $_News->imgUrl;
+    $publicId = $this->extractPublicId($imageUrl);
 
-    if (Storage::disk('public')->exists($_News->imgUrl)) {
-        Storage::disk('public')->delete($_News->imgUrl);
+    $cloudinaryResponse = cloudinary()->destroy($publicId);
+
+    if ($cloudinaryResponse['result'] !== 'ok') {
+        return response()->json([
+            'status' => false,
+            'message' => 'Failed to delete image from Cloudinary'
+        ], 500);
     }
 
     $_News->delete();
@@ -107,6 +125,15 @@ public function destroy($id)
         'status' => true,
         'message' => 'News deleted successfully'
     ], 200);
+}
+
+
+
+private function extractPublicId($imageUrl)
+{ $parts = explode('/', $imageUrl);
+    $fileNameWithExtension = end($parts);
+    $publicId = pathinfo($fileNameWithExtension, PATHINFO_FILENAME);
+    return $publicId;
 }
 
 }
