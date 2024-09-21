@@ -109,6 +109,7 @@ document.getElementById("newCauseForm").addEventListener("submit", function(even
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+    
     fetch('http://127.0.0.1:8000/api/causes')
         .then(response => {
             if (!response.ok) {
@@ -151,17 +152,19 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
 
                 document.querySelectorAll('.edit_button').forEach(button => {
-                    button.addEventListener('click', function() {
-                        const id = this.getAttribute('data-id');
-                        document.getElementById('edit_id').value = id;
-                        document.getElementById('edit_name').value = this.getAttribute('data-name');
-                        document.getElementById('edit_raised').value = this.getAttribute('data-raised');
-                        document.getElementById('edit_goal').value = this.getAttribute('data-goal');
-                        document.getElementById('edit_pre').value = this.getAttribute('data-pre');
-                        document.getElementById('edit_smallDisc').value = this.getAttribute('data-smalldisc');
-                        document.getElementById('edit_desc').value = this.getAttribute('data-desc');
-                    });
-                });
+    button.addEventListener('click', function() {
+        const id = this.getAttribute('data-id');
+        document.getElementById('edit_id').value = id;
+        document.getElementById('edit_name').value = this.getAttribute('data-name');
+        document.getElementById('edit_raised').value = this.getAttribute('data-raised');
+        document.getElementById('edit_goal').value = this.getAttribute('data-goal');
+        document.getElementById('edit_pre').value = this.getAttribute('data-pre');
+        document.getElementById('edit_smallDisc').value = this.getAttribute('data-smalldisc');
+        document.getElementById('edit_desc').value = this.getAttribute('data-desc');
+        document.getElementById('editModal').classList.add('popup');
+    });
+});
+
 
                 document.querySelectorAll('.delete_button').forEach(button => {
                     button.addEventListener('click', function() {

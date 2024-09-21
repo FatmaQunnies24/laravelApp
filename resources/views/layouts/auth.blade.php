@@ -1,36 +1,28 @@
 
 <!doctype html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
+    <head>
+       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
       <title>dashboard</title>
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+      <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
       <!-- Favicon -->
       <link rel="shortcut icon" href="{{ asset('assets/auth/images/favicon.ico') }}">
-      
-      <!-- Library / Plugin Css Build -->
+       <!-- Library / Plugin Css Build -->
       <link rel="stylesheet" href="{{ asset('assets/auth/css/core/libs.min.css') }}">
-      
       <!-- Aos Animation Css -->
       <link rel="stylesheet" href="{{ asset('assets/auth/vendor/aos/dist/aos.css') }}">
-      
       <!-- Hope Ui Design System Css -->
       <link rel="stylesheet" href="{{ asset('assets/auth/css/hope-ui.min.css?v=4.0.0') }}">
-      
       <!-- Custom Css -->
       <link rel="stylesheet" href="{{ asset('assets/auth/css/custom.min.css?v=4.0.0') }}">
-      
       <!-- Dark Css -->
       <link rel="stylesheet" href="{{ asset('assets/auth/css/dark.min.css') }}">
-      
       <!-- Customizer Css -->
       <link rel="stylesheet" href="{{ asset('assets/auth/css/customizer.min.css') }}">
-      
       <!-- RTL Css -->
       <link rel="stylesheet" href="{{ asset('assets/auth/css/rtl.min.css') }}">
       <link rel="stylesheet" href="{{ asset('assets/auth/css/beginning.css') }}">
@@ -41,21 +33,20 @@
       <link rel="stylesheet" href= "{{ asset('assets/auth/css/news.css')}}">
       <link rel="stylesheet" href= "{{ asset('assets/auth/css/about.css')}}">
       <link rel="stylesheet" href= "{{ asset('assets/auth/css/blog.css')}}">
+      <script src="scripts.js" defer></script>
 
-  </head>
+     </head>
   <body class="  ">
     <!-- loader Start -->
     <div id="loading">
       <div class="loader simple-loader">
           <div class="loader-body">
           </div>
-      </div>    </div>
+      </div></div>
     <!-- loader END -->
-    
     <aside class="sidebar sidebar-default sidebar-white sidebar-base navs-rounded-all ">
         <div class="sidebar-header d-flex align-items-center justify-content-start">
-            <a href="../dashboard/index.html" class="navbar-brand">
-                
+            <a href="../dashboard/index.html" class="navbar-brand"> 
                 <!--Logo start-->
                 <div class="logo-main">
                     <div class="logo-normal">
@@ -132,7 +123,7 @@
                         </a>
                         <ul class="sub-nav collapse" id="horizontal-menu" data-bs-parent="#sidebar-menu">
                             <li class="nav-item">
-                            <a class="nav-link"href="#"onclick="loadContent('home')">
+                            <a class="nav-link"href="#"onclick="showComponent('beginning')">
                             <i class="icon">
                                         <svg class="icon-10" xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24" fill="currentColor">
                                             <g>
@@ -183,7 +174,7 @@
                         </a>
                         <ul class="sub-nav collapse" id="sidebar-special" data-bs-parent="#sidebar-menu">
                             <li class="nav-item">
-                                <a class="nav-link "href="#"onclick="loadContent('reasone')">
+                                <a class="nav-link "href="#" onclick="showComponent('reason_of_helping')">
                                   <i class="icon">
                                         <svg class="icon-10" xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24" fill="currentColor">
                                             <g>
@@ -196,7 +187,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link " href="#"onclick="loadContent('activites')">
+                                <a class="nav-link " href="#"onclick="showComponent('activity')">
                                     <i class="icon">
                                         <svg class="icon-10" xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24" fill="currentColor">
                                             <g>
@@ -209,7 +200,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link " href="#"onclick="loadContent('causes')">
+                                <a class="nav-link " href="#"onclick="showComponent('causes')">
                                    <i class="icon">
                                         <svg class="icon-10" xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24" fill="currentColor">
                                             <g>
@@ -222,7 +213,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link " href="#"onclick="loadContent('volunteer')">
+                                <a class="nav-link " href="#"onclick="showComponent('volunteer')">
                                     <i class="icon">
                                         <svg class="icon-10" xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24" fill="currentColor">
                                             <g>
@@ -235,7 +226,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link " href="#"onclick="loadContent('new')">
+                                <a class="nav-link " href="#"onclick="showComponent('news')">
                                     <i class="icon">
                                         <svg class="icon-10" xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24" fill="currentColor">
                                             <g>
@@ -253,17 +244,9 @@
 
                     </li>
 
-
-
-
-
-
-
-
-
-<!-- Causes
- page -->
-
+          
+          
+          
                     <li class="nav-item">
                         <a class="nav-link" data-bs-toggle="collapse" href="#sidebar-auth" role="button" aria-expanded="false" aria-controls="sidebar-user">
                             <i class="icon">
@@ -295,19 +278,10 @@
                             </li>
                            
                     
-                        </ul>
+                        </ul> </li>
 
 
 
-
-
-
-
-
-
-
-
-                    </li>
 
 <!-- Causes
  page -->
@@ -330,7 +304,7 @@
                         </a>
                         <ul class="sub-nav collapse" id="sidebar-auth" data-bs-parent="#sidebar-menu">
                             <li class="nav-item">
-                                <a class="nav-link" href="#"onclick="loadContent('causes')">
+                                <a class="nav-link" href="#"onclick="showComponent('causes')">
                                     <i class="icon">
                                         <svg class="icon-10" xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24" fill="currentColor">
                                             <g>
@@ -345,19 +319,7 @@
                             </li>
                            
                     
-                        </ul>
-
-
-
-
-
-
-
-
-
-
-
-                    </li>
+                        </ul> </li>
 
 
 
@@ -384,7 +346,7 @@
                         </a>
                         <ul class="sub-nav collapse" id="sidebar-user" data-bs-parent="#sidebar-menu">
                             <li class="nav-item">
-                                <a class="nav-link " href="#"onclick="loadContent('blog')">
+                                <a class="nav-link " href="#"onclick="showComponent('blog')">
                                     <i class="icon">
                                         <svg class="icon-10" xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24" fill="currentColor">
                                             <g>
@@ -395,25 +357,14 @@
                                     <i class="sidenav-mini-icon"> U </i>
                                     <span class="item-name">Blog</span>
                                 </a>
-                            </li>
-                           
-                        
-                        </ul>
-                    </li>
+                            </li> </ul></li>
 
 
 
 
 
 
-
-
-
-
-
-
-
-                                   <li class="nav-item">
+ <li class="nav-item">
                         <a class="nav-link "  href="../dashboard/admin.html">
                             <i class="icon">
                             <svg class="icon-20" width="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -424,17 +375,9 @@
                             <span class="item-name">Admin</span>
                         </a>
                     </li>
-                    <li><hr class="hr-horizontal"></li>
-                   
+                
                     
-                               
-                        </ul>
-                    </li>
-                    
-                          
-                  
-                       
-                    </li>
+           
                     <li class="nav-item">
                         <a class="nav-link" data-bs-toggle="collapse" href="#sidebar-table" role="button" aria-expanded="false" aria-controls="sidebar-table">
                             <i class="icon">
@@ -466,7 +409,7 @@
                             </li>
                          
                             <li class="nav-item">
-            <a class="nav-link" href="javascript:void(0);" onclick="loadContent('activities')">
+            <a class="nav-link" href="javascript:void(0);" onclick="showComponent('activity')">
                 <i class="icon">
                     <svg class="icon-10" xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24" fill="currentColor">
                         <g>
@@ -483,7 +426,7 @@
 
 
                             <li class="nav-item">
-                                <a class="nav-link " href="#"onclick="loadContent('blog')">
+                                <a class="nav-link " href="#"onclick="showComponent('blog')">
                                    <i class="icon">
                                         <svg class="icon-10" xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24" fill="currentColor">
                                             <g>
@@ -501,7 +444,7 @@
 
 
                             <li class="nav-item">
-                                <a class="nav-link "  href="#"onclick="loadContent('new')">
+                                <a class="nav-link "  href="#" onclick="showComponent('news')">
                                    <i class="icon">
                                         <svg class="icon-10" xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24" fill="currentColor">
                                             <g>
@@ -518,7 +461,7 @@
 
 
                             <li class="nav-item">
-    <a class="nav-link" href="#"onclick="loadContent('reasone')">
+    <a class="nav-link" href="#" onclick="showComponent('reason_of_helping')">
         <i class="icon">
             <svg class="icon-10" xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24" fill="currentColor">
                 <g>
@@ -533,7 +476,7 @@
 
 
                             <li class="nav-item">
-                                <a class="nav-link " href="#"onclick="loadContent('volunteer')">
+                                <a class="nav-link " href="#" onclick="showComponent('volunteer')">
                                    <i class="icon">
                                         <svg class="icon-10" xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24" fill="currentColor">
                                             <g>
@@ -549,10 +492,7 @@
                     </li>
 
 
-
-
-                
-                </ul>
+ </ul>
                 <!-- Sidebar Menu End -->        </div>
         </div>
 
@@ -628,102 +568,9 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="mb-2 navbar-nav ms-auto align-items-center navbar-list mb-lg-0">
-                <li class="me-0 me-xl-2">
-                  <a class="btn btn-primary btn-sm d-flex gap-2 align-items-center" aria-current="page" href="http://hopeui.iqonic.design/pro?utm_source=hopeui-free-demo&utm_medium=hopeui-free-demo&utm_campaign=hopeui-pro-launch" target="_blank">
-                    <svg class="icon-16" width="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M21.4274 2.5783C20.9274 2.0673 20.1874 1.8783 19.4974 2.0783L3.40742 6.7273C2.67942 6.9293 2.16342 7.5063 2.02442 8.2383C1.88242 8.9843 2.37842 9.9323 3.02642 10.3283L8.05742 13.4003C8.57342 13.7163 9.23942 13.6373 9.66642 13.2093L15.4274 7.4483C15.7174 7.1473 16.1974 7.1473 16.4874 7.4483C16.7774 7.7373 16.7774 8.2083 16.4874 8.5083L10.7164 14.2693C10.2884 14.6973 10.2084 15.3613 10.5234 15.8783L13.5974 20.9283C13.9574 21.5273 14.5774 21.8683 15.2574 21.8683C15.3374 21.8683 15.4274 21.8683 15.5074 21.8573C16.2874 21.7583 16.9074 21.2273 17.1374 20.4773L21.9074 4.5083C22.1174 3.8283 21.9274 3.0883 21.4274 2.5783Z" fill="currentColor"></path>
-                      <path opacity="0.4" fill-rule="evenodd" clip-rule="evenodd" d="M3.01049 16.8079C2.81849 16.8079 2.62649 16.7349 2.48049 16.5879C2.18749 16.2949 2.18749 15.8209 2.48049 15.5279L3.84549 14.1619C4.13849 13.8699 4.61349 13.8699 4.90649 14.1619C5.19849 14.4549 5.19849 14.9299 4.90649 15.2229L3.54049 16.5879C3.39449 16.7349 3.20249 16.8079 3.01049 16.8079ZM6.77169 18.0003C6.57969 18.0003 6.38769 17.9273 6.24169 17.7803C5.94869 17.4873 5.94869 17.0133 6.24169 16.7203L7.60669 15.3543C7.89969 15.0623 8.37469 15.0623 8.66769 15.3543C8.95969 15.6473 8.95969 16.1223 8.66769 16.4153L7.30169 17.7803C7.15569 17.9273 6.96369 18.0003 6.77169 18.0003ZM7.02539 21.5683C7.17139 21.7153 7.36339 21.7883 7.55539 21.7883C7.74739 21.7883 7.93939 21.7153 8.08539 21.5683L9.45139 20.2033C9.74339 19.9103 9.74339 19.4353 9.45139 19.1423C9.15839 18.8503 8.68339 18.8503 8.39039 19.1423L7.02539 20.5083C6.73239 20.8013 6.73239 21.2753 7.02539 21.5683Z" fill="currentColor"></path>
-                    </svg>
-                    Go Pro
-                  </a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a href="#" class="search-toggle nav-link" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <img src="{{ asset('assets/auth/images/Flag/flag001.png') }}" class="img-fluid rounded-circle" alt="user" style="height: 30px; min-width: 30px; width: 30px;">
-                    <span class="bg-primary"></span>
-                    </a>
-                    <div class="p-0 sub-drop dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton2">
-                        <div class="m-0 border-0 shadow-none card">
-                            <div class="p-0 ">
-                                <ul class="p-0 list-group list-group-flush">
-                                    <li class="iq-sub-card list-group-item"><a class="p-0" href="#"><img src="{{ asset('assets/auth/images/Flag/flag-03.png" alt="img-flaf" class="img-fluid me-2') }}" style="width: 15px;height: 15px;min-width: 15px;"/>Spanish</a></li>
-                                    <li class="iq-sub-card list-group-item"><a class="p-0" href="#"><img src="{{ asset('assets/auth/images/Flag/flag-04.png" alt="img-flaf" class="img-fluid me-2') }}" style="width: 15px;height: 15px;min-width: 15px;"/>Italian</a></li>
-                                    <li class="iq-sub-card list-group-item"><a class="p-0" href="#"><img src="{{ asset('assets/auth/images/Flag/flag-02.png" alt="img-flaf" class="img-fluid me-2') }}"style="width: 15px;height: 15px;min-width: 15px;"/>French</a></li>
-                                    <li class="iq-sub-card list-group-item"><a class="p-0" href="#"><img src="{{ asset('assets/auth/images/Flag/flag-05.png" alt="img-flaf" class="img-fluid me-2') }}" style="width: 15px;height: 15px;min-width: 15px;"/>German</a></li>
-                                    <li class="iq-sub-card list-group-item"><a class="p-0" href="#"><img src="{{ asset('assets/auth/images/Flag/flag-06.png" alt="img-flaf" class="img-fluid me-2') }}" style="width: 15px;height: 15px;min-width: 15px;"/>Japanese</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <li class="nav-item dropdown">
-                  <a href="#"  class="nav-link" id="notification-drop" data-bs-toggle="dropdown" >
-                      <svg class="icon-24" width="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M19.7695 11.6453C19.039 10.7923 18.7071 10.0531 18.7071 8.79716V8.37013C18.7071 6.73354 18.3304 5.67907 17.5115 4.62459C16.2493 2.98699 14.1244 2 12.0442 2H11.9558C9.91935 2 7.86106 2.94167 6.577 4.5128C5.71333 5.58842 5.29293 6.68822 5.29293 8.37013V8.79716C5.29293 10.0531 4.98284 10.7923 4.23049 11.6453C3.67691 12.2738 3.5 13.0815 3.5 13.9557C3.5 14.8309 3.78723 15.6598 4.36367 16.3336C5.11602 17.1413 6.17846 17.6569 7.26375 17.7466C8.83505 17.9258 10.4063 17.9933 12.0005 17.9933C13.5937 17.9933 15.165 17.8805 16.7372 17.7466C17.8215 17.6569 18.884 17.1413 19.6363 16.3336C20.2118 15.6598 20.5 14.8309 20.5 13.9557C20.5 13.0815 20.3231 12.2738 19.7695 11.6453Z" fill="currentColor"></path>
-                        <path opacity="0.4" d="M14.0088 19.2283C13.5088 19.1215 10.4627 19.1215 9.96275 19.2283C9.53539 19.327 9.07324 19.5566 9.07324 20.0602C9.09809 20.5406 9.37935 20.9646 9.76895 21.2335L9.76795 21.2345C10.2718 21.6273 10.8632 21.877 11.4824 21.9667C11.8123 22.012 12.1482 22.01 12.4901 21.9667C13.1083 21.877 13.6997 21.6273 14.2036 21.2345L14.2026 21.2335C14.5922 20.9646 14.8734 20.5406 14.8983 20.0602C14.8983 19.5566 14.4361 19.327 14.0088 19.2283Z" fill="currentColor"></path>
-                      </svg>
-                      <span class="bg-danger dots"></span>
-                  </a>
-                  <div class="p-0 sub-drop dropdown-menu dropdown-menu-end" aria-labelledby="notification-drop">
-                      <div class="m-0 shadow-none card">
-                        <div class="py-3 card-header d-flex justify-content-between bg-primary">
-                            <div class="header-title">
-                              <h5 class="mb-0 text-white">All Notifications</h5>
-                            </div>
-                        </div>
-                        <div class="p-0 card-body">
-                            <a href="#" class="iq-sub-card">
-                              <div class="d-flex align-items-center">
-                                  <img class="p-1 avatar-40 rounded-pill bg-soft-primary" src="{{ asset('assets/auth/images/shapes/01.png') }}" alt="">
-                                  <div class="ms-3 w-100">
-                                    <h6 class="mb-0 ">Emma Watson Bni</h6>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <p class="mb-0">95 MB</p>
-                                        <small class="float-end font-size-12">Just Now</small>
-                                    </div>
-                                  </div>
-                              </div>
-                            </a>
-                            
-                       
-                           
-                        </div>
-                      </div>
-                  </div>
-                </li>
-                <li class="nav-item dropdown">
-                  <a href="#" class="nav-link" id="mail-drop" data-bs-toggle="dropdown"  aria-haspopup="true" aria-expanded="false">
-                    <svg class="icon-24" width="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path opacity="0.4" d="M22 15.94C22 18.73 19.76 20.99 16.97 21H16.96H7.05C4.27 21 2 18.75 2 15.96V15.95C2 15.95 2.006 11.524 2.014 9.298C2.015 8.88 2.495 8.646 2.822 8.906C5.198 10.791 9.447 14.228 9.5 14.273C10.21 14.842 11.11 15.163 12.03 15.163C12.95 15.163 13.85 14.842 14.56 14.262C14.613 14.227 18.767 10.893 21.179 8.977C21.507 8.716 21.989 8.95 21.99 9.367C22 11.576 22 15.94 22 15.94Z" fill="currentColor"></path>
-                      <path d="M21.4759 5.67351C20.6099 4.04151 18.9059 2.99951 17.0299 2.99951H7.04988C5.17388 2.99951 3.46988 4.04151 2.60388 5.67351C2.40988 6.03851 2.50188 6.49351 2.82488 6.75151L10.2499 12.6905C10.7699 13.1105 11.3999 13.3195 12.0299 13.3195C12.0339 13.3195 12.0369 13.3195 12.0399 13.3195C12.0429 13.3195 12.0469 13.3195 12.0499 13.3195C12.6799 13.3195 13.3099 13.1105 13.8299 12.6905L21.2549 6.75151C21.5779 6.49351 21.6699 6.03851 21.4759 5.67351Z" fill="currentColor"></path>
-                    </svg>
-                    <span class="bg-primary count-mail"></span>
-                  </a>
-                  <div class="p-0 sub-drop dropdown-menu dropdown-menu-end" aria-labelledby="mail-drop">
-                      <div class="m-0 shadow-none card">
-                        <div class="py-3 card-header d-flex justify-content-between bg-primary">
-                            <div class="header-title">
-                              <h5 class="mb-0 text-white">All Message</h5>
-                            </div>
-                        </div>
-                        <div class="p-0 card-body ">
-                            <a href="#" class="iq-sub-card">
-                              <div class="d-flex align-items-center">
-                                  <div class="">
-                                    <img class="p-1 avatar-40 rounded-pill bg-soft-primary" src="{{ asset('assets/auth/images/shapes/01.png') }}" alt="">
-                                  </div>
-                                  <div class="ms-3">
-                                    <h6 class="mb-0 ">Bni Emma Watson</h6>
-                                    <small class="float-start font-size-12">13 Jun</small>
-                                  </div>
-                              </div>
-                            </a>
-                          
-                       
-                        </div>
-                      </div>
-                  </div>
-                </li>
+                
+               
+
                 <li class="nav-item dropdown">
                   <a class="py-0 nav-link d-flex align-items-center" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     <img src="{{ asset('assets/auth/images/avatars/01.png') }}" alt="User-Profile" class="theme-color-default-img img-fluid avatar avatar-50 avatar-rounded">
@@ -738,9 +585,7 @@
                     </div>
                   </a>
                   <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="../dashboard/app/user-profile.html">Profile</a></li>
-                    <li><a class="dropdown-item" href="../dashboard/app/user-privacy-setting.html">Privacy Setting</a></li>
-                    <li><hr class="dropdown-divider"></li>
+                 
                     <li>
     <form action="{{ route('logoutUser') }}" method="POST">
       
@@ -756,23 +601,59 @@
         </nav>          <!-- Nav Header Component Start -->
         </main>
 
+        <script src="https://www.youtube.com/iframe_api"></script>
 
 
-<div id="contrm"> <x-activity-component /></div>
+
+
+        
+<div id="contrm"> 
+
+</div>
+
+<div class="component" id="beginning" style="display: none;">
+    <x-beginning-component />
+</div>
+<div class="component" id="reason_of_helping" style="display: none;">
+    <x-reason_of_helping-component />
+</div>
+<div class="component" id="activity" style="display: none;">
+    <x-activity-component />
+</div>
+<div class="component" id="causes" style="display: none;">
+    <x-causes-component />
+</div>
+<div class="component" id="volunteer" style="display: none;">
+    <x-volunteer-component />
+</div>
+<div class="component" id="news" style="display: none;">
+    <x-news-component />
+</div>
+<div class="component" id="about" style="display: none;">
+    <x-about-component />
+</div>
+<div class="component" id="blog" style="display: none;">
+    <x-blog-component />
+</div>
+
+
 
 <script>
-    function loadContent(viewName) {
-        document.getElementById('contrm').innerHTML = '<x-activity-component />';
+function showComponent(componentId) {
+    // إخفاء جميع العناصر
+    const components = document.querySelectorAll('.component');
+    components.forEach(component => {
+        component.style.display = 'none';
+    });
+
+    // إظهار العنصر المطلوب
+    const selectedComponent = document.getElementById(componentId);
+    if (selectedComponent) {
+        selectedComponent.style.display = 'block';
     }
+}   
 </script>
-
-
-
-
-
-
-
-      <!-- Footer Section Start -->
+  <!-- Footer Section Start -->
       <footer class="footer">
           <div class="footer-body">
               <ul class="left-panel list-inline mb-0 p-0">

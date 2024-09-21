@@ -1,5 +1,5 @@
 /* تنسيق العناصر داخل .reson_area */
-.reson_area .single_reson {
+.reson_area_area .single_reson {
     position: relative;
 }
 
@@ -12,39 +12,39 @@
 }
 
 @media (max-width: 767px) {
-    .reson_area .single_reson {
+    .reson_area_area .single_reson {
         margin-bottom: 30px;
         flex: 1 1 100%; /* عرض كامل على الشاشات الصغيرة */
     }
 }
 
 @media (min-width: 768px) and (max-width: 991px) {
-    .reson_area .single_reson {
+    .reson_area_area .single_reson {
         margin-bottom: 40px;
         
     }
 }
 
-.reson_area .single_reson .thume {
+.reson_area_area .single_reson .thume {
     margin-right: 84px;
     padding-bottom: 84px;
     display: flex;
     justify-content: right;
 }
 
-.reson_area .single_reson .thume .thum_1e {
+.reson_area_area .single_reson .thume .thum_1e {
     border-radius: 9px;
     overflow: hidden;
 }
 
-.reson_area .single_reson .thume .thum_1e img {
+.reson_area_area .single_reson .thume .thum_1e img {
     width: 100%;
     border-radius: 9px;
     transition: transform 0.3s;
     /* height: 60%; */
 }
 
-.reson_area .single_reson .help_contente {
+.reson_area_area .single_reson .help_contente {
     background: #fff;
     position: absolute;
     bottom: 0;
@@ -55,18 +55,18 @@
     left: 46px;
 }
 
-.reson_area .single_reson .help_contente h4 {
+.reson_area_area .single_reson .help_contente h4 {
     font-style: oblique;
     font-weight: bold;
     font-size: 20px;
 }
 
-.reson_area .single_reson .help_contente p {
+.reson_area_area .single_reson .help_contente p {
     margin-top: 21px;
     margin-bottom: 30px;
 }
 
-.reson_area .single_reson .help_contente .read_more {
+.reson_area_area .single_reson .help_contente .read_more {
     font-size: 16px;
     color: #BCBDBF;
     text-transform: capitalize;
@@ -75,7 +75,7 @@
     padding-left: 68px;
 }
 
-.reson_area .single_reson .help_contente .read_more::before {
+.reson_area_area .single_reson .help_contente .read_more::before {
     position: absolute;
     left: 0;
     top: 50%;
@@ -87,30 +87,31 @@
     transition: background 0.3s;
 }
 
-.reson_area .single_reson .help_contente .read_more:hover {
+.reson_area_area .single_reson .help_contente .read_more:hover {
     color: #3CC78F;
 }
 
-.reson_area .single_reson .help_contente .read_more:hover::before {
+.reson_area_area .single_reson .help_contente .read_more:hover::before {
     background: #3CC78F;
 }
 
-.reson_area .single_reson:hover .thume img {
+.reson_area_area .single_reson:hover .thume img {
     transform: scale(1.1);
 }
 
 /* تنسيق البوب أب */
 .popup {
-    display: none;
+    display: none; /* لا يظهر عند تحميل الصفحة */
     position: fixed;
     z-index: 1;
-    left: 15%; /* تحريك البوب أب إلى اليسار بنسبة إضافية 5% */
+    left: 15%;
     top: 0;
-    width: 80%; /* توسيع العرض */
+    width: 80%;
     height: 100%;
     overflow: auto;
     background-color: rgba(0, 0, 0, 0.4);
 }
+
 
 .popup-content {
     background-color: #fefefe;
