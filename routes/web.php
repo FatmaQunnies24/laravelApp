@@ -37,3 +37,27 @@ Route::post('/logout', [LoginController::class, 'logoutUser'])->name('logoutUser
 Route::post('/login', [LoginController::class, 'loginUser'])->name('loginUser');
 require __DIR__.'/auth.php';
 Route::put('/posts/{id}', [CharifitController::class, 'update']);
+
+
+Route::get('/load-reasone/reasone', function () {
+    return view('componentsPages.reasone');
+});
+           
+Route::get('/load-reasone/activites', function () {
+    return view('components.activity-component');
+});
+Route::get('/load-reasone/causes', function () {
+    return view('componentsPages.causes');
+});
+Route::get('/load-reasone/volunteer', function () {
+    return view('componentsPages.volunteer');
+});
+Route::get('/load-reasone/new', function () {
+    return view('componentsPages.new');
+});
+Route::get('/load-reasone/blog', function () {
+    return view('componentsPages.blog');
+});
+Route::get('/load-reasone/home', function () {
+    return view('componentsPages.home');
+});
