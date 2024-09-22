@@ -1,180 +1,30 @@
 /* منطقة المتطوعين */
-.our_volunteer_area {
-    margin-top: 50px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    gap: 20px;
-}
-.fa-pinterest:before{
-    color: #fff;
-}
-.fa-linkedin:before{ color: #fff;}
-.fa-twitter:before{ color: #fff;}
-.fa-facebook:before{ color: #fff;}
-
-.single_volunteer {
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    width: 300px; /* حجم الكارد */
-    position: relative;
-}
-
-.volunteer_thumb {
-    position: relative;
-    width: 100%;
-    height: 300px; /* ارتفاع الصورة */
-    overflow: hidden;
-}
-
-.volunteer_thumb img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.3s ease;
-}
-
-.volunteer_thumb img:hover {
-    transform: scale(1.05);
-}
-
-.volunteer_info {
-    padding: 20px;
-    text-align: center;
-    background-color: #fff;
-}
-
-.volunteer_info h4 {
-    font-size: 20px;
-    margin-bottom: 5px;
-    color: #333;
-}
-
-.volunteer_info p {
-    font-size: 14px;
-    color: #777;
-    margin-bottom: 10px;
-}
-
-.social_links {
-    position: absolute;
-    bottom: 10px;
-    left: 20px;
-    display: flex;
-    gap: 10px;
-}
-
-.social_links ul {
-    list-style: none;
-    padding-left: 80px;
-    margin: 100px;
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-}
-
-.social_links ul li a {
-    font-size: 16px;
-    color: #555;
-    transition: color 0.3s;
-}
-
-.social_links ul li a:hover {
-    color: #007bff;
-}
-.our_volunteer_area .single_volunteer {
-    border: 1px solid #ddd;
-    padding: 20px;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-    margin-bottom: 30px;
-}
-
-.our_volunteer_area .single_volunteer .volunteer_thumb img {
-    width: 100%;
-    height: auto;
-}
-
-.our_volunteer_area .single_volunteer .volunteer_info {
-    padding: 15px 0;
-}
-
-.our_volunteer_area .single_volunteer .volunteer_info .social_links {
-    position: relative;
-    top: 10px;
-    display: flex;
-    justify-content: center;
-    gap: 20px; /* مسافة بين الأيقونات */
-    margin-bottom: 15px;
-}
-
-.our_volunteer_area .single_volunteer .volunteer_info .social_links ul {
-    display: flex;
-    justify-content: center;
-    padding: 0;
-    margin: 0;
-    list-style: none;
-}
-
-.our_volunteer_area .single_volunteer .volunteer_info .social_links ul li {
-    margin: 0 10px;
-}
-
-.our_volunteer_area .single_volunteer .volunteer_info .edit-delete-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    margin-top: 10px;
-}
-
-.our_volunteer_area .single_volunteer .volunteer_info .edit-delete-buttons button {
-    padding: 8px 15px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.our_volunteer_area .single_volunteer .volunteer_info .edit-delete-buttons button:hover {
-    background-color: #0056b3;
-}
-
-
-
-.creative_blog-form-wrapper {
+.volunteer-form-container {
     background-color: #ffffff;
     padding: 30px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 100%;
     max-width: 600px; /* يمكنك تغيير العرض حسب الحاجة */
     margin: auto; /* توسيط النموذج */
 }
 
-.creative_blog-form-wrapper h2 {
+.volunteer-form-container h2 {
     text-align: center;
     margin-bottom: 20px;
     color: #333;
     font-size: 24px;
 }
 
-.creative_blog-form-wrapper label {
+.volunteer-form-container label {
     display: block;
     margin-bottom: 8px;
     font-weight: 500;
     color: #555;
 }
 
-.creative_blog-form-wrapper input[type="text"],
-.creative_blog-form-wrapper textarea,
-.creative_blog-form-wrapper input[type="url"],
-.creative_blog-form-wrapper input[type="file"] {
+.input-field,
+.text-field,
+.file-input {
     width: calc(100% - 24px); /* ضبط العرض مع الأخذ في الاعتبار الحشو */
     padding: 12px;
     margin-bottom: 15px;
@@ -184,33 +34,137 @@
     box-sizing: border-box;
 }
 
-.creative_blog-form-wrapper textarea {
+.text-field {
     resize: vertical;
     height: 100px;
 }
 
-.creative_blog-form-wrapper button {
+.primary-btn {
     width: 100%;
     padding: 12px;
     border: none;
     border-radius: 5px;
     font-size: 16px;
-    cursor: pointer;
-    margin-top: 10px;
-}
-
-.creative_blog-form-wrapper .submit-btn {
     background-color: #007bff;
     color: #fff;
     transition: background-color 0.3s;
+    cursor: pointer;
 }
 
-.creative_blog-form-wrapper .submit-btn:hover {
+.primary-btn:hover {
     background-color: #0056b3;
 }
 
-.creative_blog-form-wrapper .error-message {
+.alert-message {
     color: #dc3545;
     font-size: 14px;
     margin-bottom: 15px;
+    text-align: center;
+}
+
+.volunteer-list {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap; /* السماح بالتفاف العناصر */
+    gap: 10px;
+    justify-content: center; /* توسيط العناصر */
+}
+
+.single-volunteer {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: 80%; /* جعل العرض 80% */
+    max-width: 300px; /* يمكنك ضبط الحجم الأقصى حسب الحاجة */
+    position: relative;
+    margin-bottom: 20px; /* إضافة مسافة بين الكروت */
+}
+
+.volunteer-thumbnail {
+    position: relative;
+    width: 100%;
+    height: 300px; /* ارتفاع الصورة */
+    overflow: visible; /* السماح بالصورة بالخروج عن حدود الديف */
+}
+
+.volunteer-thumbnail img {
+    width: 100%;
+    height: 100%; /* تغيير إلى auto للحفاظ على نسبة العرض إلى الارتفاع */
+    position: absolute; /* تغيير الموقع */
+    left: 50%; /* تحريك الصورة إلى اليسار */
+    top: 50%; /* تحريك الصورة لأعلى */
+    transform: translate(-50%, -50%); /* توسيط الصورة */
+    transition: transform 0.3s ease;
+}
+
+.volunteer-thumbnail img:hover {
+    transform: translate(-50%, -50%) scale(1.05); /* إضافة تأثير تكبير عند التمرير */
+}
+
+.volunteer-details {
+    padding: 20px;
+    text-align: center;
+    background-color: #fff;
+}
+
+.volunteer-details h4 {
+    font-size: 20px;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.volunteer-details p {
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 10px;
+}
+
+.social-links {
+    display: flex;
+    flex-direction: column; /* وضع الأيقونات تحت بعضها */
+    position: absolute;
+    top: 10px; /* ضبط للمسافة من الأعلى */
+    right: 10px; /* نقل الأيقونات قليلاً لليمين */
+}
+
+.social-links ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column; /* وضع العناصر تحت بعضها */
+    gap: 5px; /* مسافة بين الأيقونات */
+}
+
+.social-links ul li a {
+    font-size: 16px;
+    color: #555;
+    transition: color 0.3s;
+}
+
+.social-links ul li a:hover {
+    color: #007bff;
+}
+
+.edit-delete-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.edit-delete-buttons button {
+    padding: 8px 15px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.edit-delete-buttons button:hover {
+    background-color: #0056b3;
 }
