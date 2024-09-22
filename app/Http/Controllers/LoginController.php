@@ -51,7 +51,6 @@ class LoginController extends Controller
             ], 500);
         }
     }
-
     public function loginUser(Request $request)
     {
         try {
@@ -59,7 +58,7 @@ class LoginController extends Controller
                 'email' => 'required|email',
                 'password' => 'required'
             ]);
-
+    
             if ($validateUser->fails()) {
                 return response()->json([
                     'status' => false,
@@ -67,22 +66,27 @@ class LoginController extends Controller
                     'errors' => $validateUser->errors()
                 ], 401);
             }
-
+    
             if (!Auth::attempt($request->only(['email', 'password']))) {
                 return response()->json([
                     'status' => false,
                     'message' => 'Email & Password do not match our records.'
                 ], 401);
             }
-
-            $user = User::where('email', $request->email)->first();
+    
+            $user = Auth::user();
+            $token = $user->createToken("API TOKEN")->plainTextToken;
+            // localStorage.setItem('api_token', $token);
+            session(['api_token' => $token]);   
+            dd(session('api_token'));
+            return redirect()->route('home');
 
             return response()->json([
                 'status' => true,
                 'message' => 'User Logged In Successfully',
-                'token' => $user->createToken("API TOKEN")->plainTextToken
+                'token' => $token
             ], 200);
-
+    
         } catch (\Throwable $th) {
             return response()->json([
                 'status' => false,
@@ -90,6 +94,7 @@ class LoginController extends Controller
             ], 500);
         }
     }
+    
 
     public function logoutUser(Request $request)
     {

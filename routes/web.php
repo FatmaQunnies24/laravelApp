@@ -21,7 +21,9 @@ use App\Http\Controllers\CharifitController;
 //     return view('layouts.auth');
 // });
 
-Route::get('/home', [DashboartController::class, 'index'])->name('home');
+Route::group(['middleware' => 'check.token'], function () {
+    Route::get('/home', [DashboartController::class, 'index'])->name('home');
+});
 Route::get('/signIn', [DashboartController::class, 'signIn']);
 Route::get('/signUp', [DashboartController::class, 'signUp'])->name('signUp');
 Route::post('/createUser', [LoginController::class, 'createUser'])->name('createUser');
