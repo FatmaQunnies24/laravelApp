@@ -1,5 +1,5 @@
-/* Styles for news section */
-.news__areaa {
+/* Styles for the news section */
+.nene_news__areaaa {
     background: #F3FCF8;
     padding: 40px 0;
     display: flex;
@@ -12,13 +12,13 @@
     margin: 0 auto;
 }
 
-.news__areaa::-webkit-scrollbar {
+.nene_news__areaaa::-webkit-scrollbar {
     width: 0;
     height: 0;
 }
 
 /* Styles for individual news items */
-.single__bloga {
+.nene_single__bloga {
     background: #fff;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
     border-radius: 7px;
@@ -30,59 +30,46 @@
     position: relative;
 }
 
-.thuma {
+.nene_thuma {
     width: 50%;
     height: 100%;
     overflow: hidden;
 }
 
-.thuma img {
+.nene_thuma img {
     width: 100%;
     height: auto;
     display: block;
 }
 
-.newsinfoa {
+.nene_newsinfoa {
     padding: 20px;
     width: 50%;
     text-align: left;
 }
 
-.newsinfoa span {
+.nene_newsinfoa span {
     font-size: 14px;
     font-weight: 600;
     color: #222222;
-    font-family: "Open Sans", sans-serif;
 }
 
-.newsinfoa h3 {
+.nene_newsinfoa h3 {
     font-size: 20px;
     color: #222222;
     margin-top: 10px;
-    font-family: "Open Sans", sans-serif;
     font-weight: bold;
 }
 
-.newsinfoa p {
+.nene_newsinfoa p {
     font-size: 16px;
     line-height: 1.5;
     color: #7A7B7C;
     margin: 15px 0;
 }
 
-.newsinfoa .read_morea {
-    font-size: 14px;
-    font-weight: 600;
-    color: #009688;
-    text-decoration: none;
-}
-
-.newsinfoa .read_morea:hover {
-    text-decoration: underline;
-}
-
 /* Styles for buttons (Edit and Delete) */
-.button-container {
+.nene_button-container {
     position: absolute;
     bottom: 10px;
     right: 10px;
@@ -90,7 +77,7 @@
     gap: 10px;
 }
 
-.button-container button {
+.nene_button-container button {
     background-color: #009688;
     color: #fff;
     border: none;
@@ -102,155 +89,147 @@
     transition: background-color 0.3s ease;
 }
 
-.button-container button.edit {
-    background-color: #FF9800; /* Orange color for edit */
-}
-
-.button-container button.delete {
-    background-color: #F44336; /* Red color for delete */
-}
-
-.button-container button:hover {
+.nene_button-container button:hover {
     background-color: #00796B; /* Darker shade for general button hover */
-}
-
-.button-container button.edit:hover {
-    background-color: #E68A00; /* Darker orange for edit button hover */
-}
-
-.button-container button.delete:hover {
-    background-color: #C62828; /* Darker red for delete button hover */
 }
 
 /* Responsive design for smaller screens */
 @media (max-width: 767px) {
-    .news__areaa {
+    .nene_news__areaaa {
         flex-direction: column;
         padding-left: 5%;
         padding-right: 5%;
         width: 100%;
     }
 
-    .single__bloga {
+    .nene_single__bloga {
         width: 100%;
         flex-direction: column;
     }
 
-    .thuma, 
-    .newsinfoa {
+    .nene_thuma, 
+    .nene_newsinfoa {
         width: 100%;
     }
 }
 
 /* Styles for the popup */
-.popup {
+.nene_popup {
+    display: block; /* اجعل النافذة مرئية دائمًا */
     position: fixed;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
-}
-
-.popup-content {
-    background: #fff;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     padding: 20px;
-    border-radius: 5px;
-    position: relative;
-    width: 400px;
+    z-index: 1000;
+    width: 90%;
+    max-width: 500px; /* عرض أقصى للنافذة */
 }
 
-.popup-content .close {
+.nene_popup-content {
+    position: relative;
+}
+
+.nene-close {
     position: absolute;
     top: 10px;
     right: 10px;
     font-size: 20px;
     cursor: pointer;
+    color: #999; /* لون زر الإغلاق */
+    transition: color 0.3s;
 }
 
-.popup-content h3 {
+.nene-close:hover {
+    color: #ff0000; /* تغيير اللون عند التحويم */
+}
+
+.nene-popup h3 {
     margin-top: 0;
+    color: #333; /* لون العنوان */
+    text-align: center;
 }
 
-.popup-content form {
+.nene-popup form {
     display: flex;
     flex-direction: column;
 }
 
-.popup-content label {
+.nene-popup label {
     margin-bottom: 5px;
+    color: #555; /* لون النص */
 }
 
-.popup-content input, 
-.popup-content textarea {
-    margin-bottom: 15px;
+.nene-popup input[type="text"],
+.nene-popup textarea,
+.nene-popup input[type="file"] {
+    width: 100%;
     padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
 }
 
-.popup-content button {
-    padding: 10px 20px;
+.nene-popup button {
+    padding: 10px;
     border: none;
-    background-color: #009688;
+    border-radius: 5px;
+    background-color: #007bff;
     color: #fff;
-    border-radius: 4px;
     cursor: pointer;
+    transition: background-color 0.3s;
 }
 
-.popup-content button:hover {
-    background-color: #00796B;
+.nene-popup button:hover {
+    background-color: #0056b3; /* تغيير لون الزر عند التحويم */
 }
 
-
-
-
-.unique_blog-form-container {
+/* Styles for unique blog form */
+.nene_blog-form-container {
     background-color: #ffffff;
     padding: 30px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     width: 100%;
-    max-width: 600px; /* يمكنك تغيير العرض حسب الحاجة */
-    margin: auto; /* توسيط النموذج */
+    max-width: 600px;
+    margin: auto; /* Center the form */
 }
 
-.unique_blog-form-container h2 {
+.nene_blog-form-container h2 {
     text-align: center;
     margin-bottom: 20px;
     color: #333;
     font-size: 24px;
 }
 
-.unique_blog-form-container label {
+.nene_blog-form-container label {
     display: block;
     margin-bottom: 8px;
     font-weight: 500;
     color: #555;
 }
 
-.unique_blog-form-container input[type="text"],
-.unique_blog-form-container textarea,
-.unique_blog-form-container input[type="file"] {
-    width: calc(100% - 24px); /* ضبط العرض مع الأخذ في الاعتبار الحشو */
+.nene_blog-form-container input[type="text"],
+.nene_blog-form-container textarea,
+.nene_blog-form-container input[type="file"] {
+    width: calc(100% - 24px);
     padding: 12px;
     margin-bottom: 15px;
     border: 1px solid #ddd;
     border-radius: 5px;
     font-size: 16px;
-    box-sizing: border-box;
 }
 
-.unique_blog-form-container textarea {
+.nene_blog-form-container textarea {
     resize: vertical;
     height: 100px;
 }
 
-.unique_blog-form-container button {
+.nene_blog-form-container button {
     width: 100%;
     padding: 12px;
     border: none;
@@ -258,20 +237,38 @@
     font-size: 16px;
     cursor: pointer;
     margin-top: 10px;
-}
-
-.unique_blog-form-container .submit-btn {
     background-color: #007bff;
     color: #fff;
     transition: background-color 0.3s;
 }
 
-.unique_blog-form-container .submit-btn:hover {
+.nene_blog-form-container button:hover {
     background-color: #0056b3;
 }
 
-.unique_blog-form-container .error-message {
+.nene_blog-form-container .nene-error-message {
     color: #dc3545;
     font-size: 14px;
     margin-bottom: 15px;
 }
+.nene-popup {
+    display: none; /* إخفاء النافذة بشكل افتراضي */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 20px;
+    z-index: 1000;
+}
+.overlay {
+    display: none; /* إخفاء الطبقة الخلفية بشكل افتراضي */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+} 
