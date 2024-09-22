@@ -1,12 +1,14 @@
-.blog__areaa {
+/* حاوية البطاقة */
+.bobo_blog__area {
     display: flex;
-    flex-wrap: wrap; /* السماح بالانتقال إلى السطر التالي عند الحاجة */
+    flex-wrap: wrap;
     gap: 20px; /* المسافة بين البطاقات */
     justify-content: center; /* توسيط البطاقات أفقيًا */
     margin: 20px 0;
 }
 
-.blog_item {
+/* نمط البطاقة */
+.bobo_blog_item {
     width: calc(33.33% - 20px); /* ضبط العرض ليكون ثلث الصفحة مع طرح المسافات */
     border: 1px solid #ddd;
     padding: 15px;
@@ -15,58 +17,59 @@
     background-color: #fff;
     overflow: hidden; /* للتأكد من عدم خروج المحتوى عن الحواف */
     position: relative;
-    transition: transform 0.3s, box-shadow 0.3s; /* إضافة تأثير انتقال */
+    transition: transform 0.3s, box-shadow 0.3s; /* إضافة تأثير الانتقال عند التمرير */
 }
 
-.blog_item:hover {
+/* التأثير عند التمرير بالماوس */
+.bobo_blog_item:hover {
     transform: translateY(-5px); /* حركة عند التمرير بالماوس */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* تأثير ظل عند التمرير بالماوس */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* تأثير ظل عند التمرير */
 }
 
-.blog_item_img {
+/* الصورة داخل البطاقة */
+.bobo_blog_item_img {
     position: relative;
     margin-bottom: 15px;
 }
 
-.blog_item_img img {
+.bobo_blog_item_img img {
     width: 100%;
     height: auto;
-    border-radius: 10px;
+    border-radius: 10px; /* جعل الصورة بحواف دائرية */
 }
 
-.blog_item_date {
+/* التاريخ داخل البطاقة */
+.bobo_blog_item_date {
     position: absolute;
-    bottom: 10px; /* يجعل التاريخ قريب من الأسفل */
+    bottom: 10px;
     left: 15px;
     background-color: #3CC78F;
     padding: 8px 15px;
     color: #fff;
     border-radius: 5px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.blog_item_date h3 {
+.bobo_blog_item_date h3 {
     font-size: 22px;
     margin: 0;
     font-weight: bold;
 }
 
-.blog_item_date p {
+.bobo_blog_item_date p {
     margin: 0;
     font-size: 12px;
 }
 
-.blog_details {
+/* تفاصيل البطاقة */
+.bobo_blog_details {
     padding: 20px 0;
     text-align: left; /* ترتيب النص لليسار */
     position: relative;
     padding-bottom: 60px; /* لضمان وجود مساحة للأزرار */
 }
 
-.blog_details h2 {
+.bobo_blog_details h2 {
     font-size: 22px;
     margin-bottom: 10px;
     color: #333;
@@ -75,14 +78,14 @@
     transition: color 0.5s;
 }
 
-.blog_details p {
+.bobo_blog_details p {
     font-size: 14px;
     color: #666;
     line-height: 1.6;
 }
 
-/* تصميم الأزرار */
-.blog_details .button_container {
+/* تصميم الأزرار داخل البطاقة */
+.bobo_blog_details .button_container {
     display: flex;
     justify-content: flex-start; /* لضبط الأزرار على الجانب الأيسر */
     gap: 10px; /* لإضافة مسافة بين الأزرار */
@@ -91,7 +94,8 @@
     left: 0;
 }
 
-.blog_details button {
+/* تنسيق الأزرار */
+.bobo_blog_details button {
     background-color: #3CC78F;
     color: #fff;
     border: none;
@@ -102,92 +106,121 @@
     margin-top: 10px;
 }
 
-.blog_details button:hover {
+.bobo_blog_details button:hover {
     background-color: #2a8a64;
 }
 
-
-
-
-
-
-
-
-.weird_form-container {
+/* تنسيق نموذج إنشاء المدونة */
+.bobo_form-container {
     background-color: #ffffff;
     padding: 30px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     width: 100%;
-    max-width: 600px; /* يمكنك تغيير العرض حسب الحاجة */
-    margin: auto; /* توسيط النموذج */
+    max-width: 600px;
+    margin: 20px auto;
 }
 
-.weird_form-container h2 {
+.bobo_form-container h2 {
     text-align: center;
-    margin-bottom: 20px;
-    color: #333;
     font-size: 24px;
+    color: #3CC78F;
+    margin-bottom: 20px;
 }
 
-.weird_form-container label {
+.bobo_form-container label {
     display: block;
-    margin-bottom: 8px;
-    font-weight: 500;
-    color: #555;
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 5px;
 }
 
-.weird_form-container input[type="text"],
-.weird_form-container textarea,
-.weird_form-container input[type="date"],
-.weird_form-container input[type="file"] {
-    width: calc(100% - 24px); /* ضبط العرض مع الأخذ في الاعتبار الحشو */
-    padding: 12px;
-    margin-bottom: 15px;
+.bobo_form-container input, .bobo_form-container textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
     border: 1px solid #ddd;
     border-radius: 5px;
-    font-size: 16px;
-    box-sizing: border-box;
 }
 
-.weird_form-container textarea {
-    resize: vertical;
-    height: 100px;
-}
-
-.weird_form-container button {
+.bobo_form-container button {
     width: 100%;
-    padding: 12px;
+    background-color: #3CC78F;
+    color: #fff;
     border: none;
-    border-radius: 5px;
+    padding: 10px;
     font-size: 16px;
+    border-radius: 5px;
     cursor: pointer;
-    margin-top: 10px;
-}
-
-.weird_form-container .submit-btn {
-    background-color: #007bff;
-    color: #fff;
     transition: background-color 0.3s;
 }
 
-.weird_form-container .submit-btn:hover {
-    background-color: #0056b3;
+.bobo_form-container button:hover {
+    background-color: #2a8a64;
 }
 
-.weird_form-container .cancel-btn {
-    background-color: #dc3545;
+/* نافذة تعديل المدونة */
+.bobo-popup {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.bobo-popup-content {
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50%;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.bobo-popup-content h3 {
+    text-align: center;
+    color: #3CC78F;
+}
+
+.bobo-close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.bobo-close:hover, .bobo-close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.bobo-popup input, .bobo-popup textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.bobo-popup button {
+    width: 100%;
+    background-color: #3CC78F;
     color: #fff;
-    margin-top: 5px;
+    border: none;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
     transition: background-color 0.3s;
 }
 
-.weird_form-container .cancel-btn:hover {
-    background-color: #c82333;
-}
-
-.weird_form-container .error-message {
-    color: #dc3545;
-    font-size: 14px;
-    margin-bottom: 15px;
+.bobo-popup button:hover {
+    background-color: #2a8a64;
 }
