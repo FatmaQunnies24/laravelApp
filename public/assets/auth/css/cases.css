@@ -49,6 +49,9 @@ h2 {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
+    width: 80%;
+    margin-left: 10%;
+    margin-top: 7%;
 }
 
 .single_cause {
@@ -128,4 +131,5 @@ h2 {
 
 .modal-body {
     padding: 20px;
+    
 }
